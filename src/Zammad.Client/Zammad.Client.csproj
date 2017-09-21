@@ -1,5 +1,12 @@
 <Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
+    <Authors>Asesjix</Authors>
+    <NeutralLanguage>en-US</NeutralLanguage>
+    <AssemblyTitle>Zammad Client</AssemblyTitle>
+    <Description>Zammad Client Library for .NET</Description>
+    <Version>1.0.0<Version>
+  </PropertyGroup>
+  <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
   </PropertyGroup>
   <ItemGroup>
