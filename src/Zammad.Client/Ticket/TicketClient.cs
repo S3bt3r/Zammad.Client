@@ -54,6 +54,11 @@ namespace Zammad.Client.Ticket
             return ExecuteAsync<IList<TicketArticle>>(HttpMethod.Get, "/api/v1/ticket_articles");
         }
 
+        public Task<IList<TicketArticle>> GetTicketArticleListForTicketAsync(int ticketId)
+        {
+            return ExecuteAsync<IList<TicketArticle>>(HttpMethod.Get, "/api/v1/ticket_articles/by_ticket/{ticketId}");
+        }
+
         public Task<TicketArticle> GetTicketArticleAsync(int id)
         {
             return ExecuteAsync<TicketArticle>(HttpMethod.Get, "/api/v1/ticket_articles/{id}");
