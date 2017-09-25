@@ -25,6 +25,11 @@ namespace Zammad.Client.User
             return ExecuteAsync<IList<User>>(HttpMethod.Get, "/api/v1/users");
         }
 
+        public Task<IList<User>> GetUserListAsync(int page, int count)
+        {
+            return ExecuteAsync<IList<User>>(HttpMethod.Get, "/api/v1/users?page={page},per_page={count}");
+        }
+
         public Task<IList<User>> SearchUserAsync(string query, int limit)
         {
             return ExecuteAsync<IList<User>>(HttpMethod.Get, "/api/v1/users", $"?query={query}&limit={limit}");

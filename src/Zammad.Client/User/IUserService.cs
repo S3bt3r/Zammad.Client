@@ -7,6 +7,7 @@ namespace Zammad.Client.User
     {
         Task<User> GetUserMeAsync();
         Task<IList<User>> GetUserListAsync();
+        Task<IList<User>> GetUserListAsync(int page, int count);
         Task<IList<User>> SearchUserAsync(string query, int limit);
         Task<User> GetUserAsync(int id);
         Task<User> CreateUserAsync(User user);

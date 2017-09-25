@@ -7,6 +7,7 @@ namespace Zammad.Client.Organization
     public interface IOrganizationService
     {
         Task<IList<Organization>> GetOrganizationListAsync();
+        Task<IList<Organization>> GetOrganizationListAsync(int page, int count);
         Task<IList<Organization>> SearchOrganizationAsync(string query, int limit);
         Task<Organization> GetOrganizationAsync(int id);
         Task<Organization> CreateOrganizationAsync(Organization organization);

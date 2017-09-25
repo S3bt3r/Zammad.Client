@@ -6,6 +6,7 @@ namespace Zammad.Client.Ticket
     public interface ITicketStateService
     {
         Task<IList<TicketState>> GetTicketStateListAsync();
+        Task<IList<TicketState>> GetTicketStateListAsync(int page, int count);
         Task<TicketState> GetTicketStateAsync(int id);
         Task<TicketState> CreateTicketStateAsync(TicketState priority);
         Task<TicketState> UpdateTicketStateAsync(int id, TicketState priority);

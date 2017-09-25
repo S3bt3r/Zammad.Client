@@ -20,6 +20,11 @@ namespace Zammad.Client.Group
             return ExecuteAsync<IList<Group>>(HttpMethod.Get, "/api/v1/groups");
         }
 
+        public Task<IList<Group>> GetGroupListAsync(int page, int count)
+        {
+            return ExecuteAsync<IList<Group>>(HttpMethod.Get, "/api/v1/groups?page={page},per_page={count}");
+        }
+
         public Task<Group> GetGroupAsync(int id)
         {
             return ExecuteAsync<Group>(HttpMethod.Get, "/api/v1/groups/{id}");

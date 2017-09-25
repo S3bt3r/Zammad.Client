@@ -20,6 +20,11 @@ namespace Zammad.Client.Ticket
             return ExecuteAsync<IList<Ticket>>(HttpMethod.Get, "/api/v1/tickets");
         }
 
+        public Task<IList<Ticket>> GetTicketListAsync(int page, int count)
+        {
+            return ExecuteAsync<IList<Ticket>>(HttpMethod.Get, "/api/v1/tickets?page={page},per_page={count}");
+        }
+
         public Task<IList<Ticket>> SearchTicketAsync(string query, int limit)
         {
             return ExecuteAsync<IList<Ticket>>(HttpMethod.Get, "/api/v1/tickets", $"?query={query}&limit={limit}");
@@ -54,6 +59,11 @@ namespace Zammad.Client.Ticket
             return ExecuteAsync<IList<TicketArticle>>(HttpMethod.Get, "/api/v1/ticket_articles");
         }
 
+        public Task<IList<TicketArticle>> GetTicketArticleListAsync(int page, int count)
+        {
+            return ExecuteAsync<IList<TicketArticle>>(HttpMethod.Get, "/api/v1/ticket_articles?page={page},per_page={count}");
+        }
+
         public Task<IList<TicketArticle>> GetTicketArticleListForTicketAsync(int ticketId)
         {
             return ExecuteAsync<IList<TicketArticle>>(HttpMethod.Get, "/api/v1/ticket_articles/by_ticket/{ticketId}");
@@ -76,6 +86,11 @@ namespace Zammad.Client.Ticket
         public Task<IList<TicketPriority>> GetTicketPriorityListAsync()
         {
             return ExecuteAsync<IList<TicketPriority>>(HttpMethod.Get, "/api/v1/ticket_priorities");
+        }
+
+        public Task<IList<TicketPriority>> GetTicketPriorityListAsync(int page, int count)
+        {
+            return ExecuteAsync<IList<TicketPriority>>(HttpMethod.Get, "/api/v1/ticket_priorities?page={page},per_page={count}");
         }
 
         public Task<TicketPriority> GetTicketPriorityAsync(int id)
@@ -105,6 +120,11 @@ namespace Zammad.Client.Ticket
         public Task<IList<TicketState>> GetTicketStateListAsync()
         {
             return ExecuteAsync<IList<TicketState>>(HttpMethod.Get, "/api/v1/ticket_states");
+        }
+
+        public Task<IList<TicketState>> GetTicketStateListAsync(int page, int count)
+        {
+            return ExecuteAsync<IList<TicketState>>(HttpMethod.Get, "/api/v1/ticket_states?page={page},per_page={count}");
         }
 
         public Task<TicketState> GetTicketStateAsync(int id)

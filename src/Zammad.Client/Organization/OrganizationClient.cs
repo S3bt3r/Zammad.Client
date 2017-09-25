@@ -20,6 +20,11 @@ namespace Zammad.Client.Organization
             return ExecuteAsync<IList<Organization>>(HttpMethod.Get, "/api/v1/organizations");
         }
 
+        public Task<IList<Organization>> GetOrganizationListAsync(int page, int count)
+        {
+            return ExecuteAsync<IList<Organization>>(HttpMethod.Get, "/api/v1/organizations?page={page},per_page={count}");
+        }
+
         public Task<IList<Organization>> SearchOrganizationAsync(string query, int limit)
         {
             return ExecuteAsync<IList<Organization>>(HttpMethod.Get, "/api/v1/organizations", $"?query={query}&limit={limit}");

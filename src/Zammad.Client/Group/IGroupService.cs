@@ -6,6 +6,7 @@ namespace Zammad.Client.Group
     public interface IGroupService
     {
         Task<IList<Group>> GetGroupListAsync();
+        Task<IList<Group>> GetGroupListAsync(int page, int count);
         Task<Group> GetGroupAsync(int id);
         Task<Group> CreateGroupAsync(Group group);
         Task<Group> UpdateGroupAsync(int id, Group group);
