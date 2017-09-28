@@ -1,8 +1,9 @@
-using System.Collections.Generic;
 using Newtonsoft.Json;
+using System.Collections.Generic;
 
 namespace Zammad.Client.Ticket
 {
+    [JsonObject]
     public class TicketAttachment
     {
         [JsonProperty("id")]

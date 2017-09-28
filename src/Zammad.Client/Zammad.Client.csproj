@@ -1,14 +1,23 @@
 <Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
-    <Authors>Asesjix</Authors>
-    <NeutralLanguage>en-US</NeutralLanguage>
-    <AssemblyTitle>Zammad Client</AssemblyTitle>
-    <Description>Zammad Client Library for .NET</Description>
+    <AssemblyTitle>Zammad.Client</AssemblyTitle>
     <Version>1.0.0</Version>
+    <NeutralLanguage>en-US</NeutralLanguage>
+    <Product>Zammad Client</Product>
+    <Description>Zammad Client Library for .NET</Description>
+    <Authors>Asesjix</Authors>
+    <PackageProjectUrl>https://github.com/Asesjix/Zammad-Client</PackageProjectUrl>
+    <PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>
+    <PackageLicenseUrl>https://raw.githubusercontent.com/Asesjix/Zammad-Client/master/LICENSE</PackageLicenseUrl>
     <PackageTags>zammad</PackageTags>
+    <RepositoryUrl>https://github.com/Asesjix/Zammad-Client</RepositoryUrl>
+    <RepositoryType>Git</RepositoryType>
   </PropertyGroup>
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+    <DefineConstants>TRACE;DEBUG;NETCOREAPP2_0</DefineConstants>
   </PropertyGroup>
   <ItemGroup>
     <PackageReference Include="Newtonsoft.Json" Version="10.0.3" />

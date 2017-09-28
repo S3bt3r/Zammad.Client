@@ -1,8 +1,9 @@
-using System;
 using Newtonsoft.Json;
+using System;
 
 namespace Zammad.Client.OnlineNotification
 {
+    [JsonObject]
     public class OnlineNotification
     {
         [JsonProperty("id")]

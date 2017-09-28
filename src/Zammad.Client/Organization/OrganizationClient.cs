@@ -1,5 +1,4 @@
 ﻿using System.Collections.Generic;
-using System.Net.Http;
 using System.Threading.Tasks;
 using Zammad.Client.Core;
 
@@ -17,37 +16,37 @@ namespace Zammad.Client.Organization
 
         public Task<IList<Organization>> GetOrganizationListAsync()
         {
-            return ExecuteAsync<IList<Organization>>(HttpMethod.Get, "/api/v1/organizations");
+            return GetAsync<IList<Organization>>("/api/v1/organizations");
         }
 
         public Task<IList<Organization>> GetOrganizationListAsync(int page, int count)
         {
-            return ExecuteAsync<IList<Organization>>(HttpMethod.Get, "/api/v1/organizations?page={page},per_page={count}");
+            return GetAsync<IList<Organization>>("/api/v1/organizations?page={page},per_page={count}");
         }
 
         public Task<IList<Organization>> SearchOrganizationAsync(string query, int limit)
         {
-            return ExecuteAsync<IList<Organization>>(HttpMethod.Get, "/api/v1/organizations", $"?query={query}&limit={limit}");
+            return GetAsync<IList<Organization>>("/api/v1/organizations", $"?query={query}&limit={limit}");
         }
 
         public Task<Organization> GetOrganizationAsync(int id)
         {
-            return ExecuteAsync<Organization>(HttpMethod.Get, "/api/v1/organizations/{id}");
+            return GetAsync<Organization>("/api/v1/organizations/{id}");
         }
 
         public Task<Organization> CreateOrganizationAsync(Organization organization)
         {
-            return ExecuteAsync<Organization>(HttpMethod.Post, "/api/v1/organizations", organization);
+            return PostAsync<Organization>("/api/v1/organizations", organization);
         }
 
         public Task<Organization> UpdateOrganizationAsync(int id, Organization organization)
         {
-            return ExecuteAsync<Organization>(HttpMethod.Put, "/api/v1/organizations/{id}", organization);
+            return PutAsync<Organization>("/api/v1/organizations/{id}", organization);
         }
 
         public Task<bool> DeleteOrganizationAsync(int id)
         {
-            return ExecuteAsync<bool>(HttpMethod.Delete, "/api/v1/organizations/{id}");
+            return DeleteAsync("/api/v1/organizations/{id}");
         }
 
         #endregion
