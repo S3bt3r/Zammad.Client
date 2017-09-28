@@ -10,11 +10,11 @@ namespace Zammad.Client.Core
 {
     public abstract class ZammadClient
     {
-        private ZammadAccount _account;
+        private readonly ZammadAccount _account;
 
         protected ZammadClient(ZammadAccount account)
         {
-            _account = account;
+            _account = account ?? throw new ArgumentNullException(nameof(account));
         }
 
         protected Task<TResponse> ExecuteAsync<TResponse>(HttpMethod method, string path)
@@ -116,8 +116,7 @@ namespace Zammad.Client.Core
 
         private async Task<HttpResponseMessage> SendHttpRequestAsync(HttpRequestMessage requestMessage)
         {
-            using (var httpClientHandler = new HttpClientHandler())
-            using (var httpClient = new HttpClient())
+            using (var httpClient = _account.CreateHttpClient())
             {
                 return await httpClient.SendAsync(requestMessage);
             }

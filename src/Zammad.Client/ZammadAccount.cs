@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Net.Http;
 using Zammad.Client.Core;
 using Zammad.Client.Group;
 using Zammad.Client.OnlineNotification;
@@ -63,6 +64,11 @@ namespace Zammad.Client
         public string Password => _password;
         public string Token => _token;
         public ZammadAuthMethod AuthMethod => _authMethod;
+
+        internal protected virtual HttpClient CreateHttpClient()
+        {
+            return new HttpClient(new HttpClientHandler(), true);
+        }
 
         public static ZammadAccount CreateBasicAccount(string schema, string host, string user, string password)
         {
