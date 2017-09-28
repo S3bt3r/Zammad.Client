@@ -6,53 +6,67 @@ namespace Zammad.Client
     public class ZammadAccountTest
     {
         [Theory]
-        [InlineData("http", "test.zammad.com", "user", "password")]
-        [InlineData("https", "test.zammad.com", "user", "password")]
-        public void CreateBasicAccount_Success_Test(string schema, string host, string user, string password)
+        [InlineData("http://test.zammad.com/", "user", "password")]
+        [InlineData("https://test.zammad.com/", "user", "password")]
+        public void CreateBasicAccount_Success_Test(string endpoint, string user, string password)
         {
-            var account = ZammadAccount.CreateBasicAccount(schema, host, user, password);
-            Assert.Equal(schema, account.Schema);
-            Assert.Equal(host, account.Host);
+            var account = ZammadAccount.CreateBasicAccount(endpoint, user, password);
+            Assert.Equal(endpoint, account.Endpoint.AbsoluteUri);
             Assert.Equal(user, account.User);
             Assert.Equal(password, account.Password);
             Assert.Equal(null, account.Token);
         }
 
         [Theory]
-        [InlineData("tcp", "test.zammad.com", "user", "password")]
-        [InlineData("http", "", "user", "password")]
-        [InlineData("http", "test.zammad.com", "", "password")]
-        [InlineData("http", "test.zammad.com", "user", "")]
-        public void CreateBasicAccount_Throws_Test(string schema, string host, string user, string password)
+        [InlineData("http://", "user", "password")]
+        public void CreateBasicAccount_Uri_Fail_Test(string endpoint, string user, string password)
         {
-            Assert.ThrowsAny<ArgumentException>(() =>
+            Assert.ThrowsAny<UriFormatException>(() =>
             {
-                var account = ZammadAccount.CreateBasicAccount(schema, host, user, password);
+                var account = ZammadAccount.CreateBasicAccount(endpoint, user, password);
             });
         }
 
         [Theory]
-        [InlineData("http", "test.zammad.com", "token")]
-        [InlineData("https", "test.zammad.com", "token")]
-        public void CreateTokenAccount_Success_Test(string schema, string host, string token)
+        [InlineData("http://test.zammad.com/", "", "password")]
+        [InlineData("http://test.zammad.com/", "user", "")]
+        public void CreateBasicAccount_UserPassword_Fail_Test(string endpoint, string user, string password)
         {
-            var account = ZammadAccount.CreateTokenAccount(schema, host, token);
-            Assert.Equal(schema, account.Schema);
-            Assert.Equal(host, account.Host);
+            Assert.ThrowsAny<ArgumentException>(() =>
+            {
+                var account = ZammadAccount.CreateBasicAccount(endpoint, user, password);
+            });
+        }
+
+        [Theory]
+        [InlineData("http://test.zammad.com/", "token")]
+        [InlineData("https://test.zammad.com/", "token")]
+        public void CreateTokenAccount_Success_Test(string endpoint, string token)
+        {
+            var account = ZammadAccount.CreateTokenAccount(endpoint, token);
+            Assert.Equal(endpoint, account.Endpoint.AbsoluteUri);
             Assert.Equal(null, account.User);
             Assert.Equal(null, account.Password);
             Assert.Equal(token, account.Token);
         }
 
         [Theory]
-        [InlineData("tcp", "test.zammad.com", "token")]
-        [InlineData("http", "", "token")]
-        [InlineData("http", "test.zammad.com", "")]
-        public void CreateTokenAccount_Throws_Test(string schema, string host, string token)
+        [InlineData("http://", "token")]
+        public void CreateTokenAccount_Uri_Fail_Test(string endpoint, string token)
+        {
+            Assert.ThrowsAny<UriFormatException>(() =>
+            {
+                var account = ZammadAccount.CreateTokenAccount(endpoint, token);
+            });
+        }
+
+        [Theory]
+        [InlineData("http://test.zammad.com/", "")]
+        public void CreateTokenAccount_Token_Fail_Test(string endpoint, string token)
         {
             Assert.ThrowsAny<ArgumentException>(() =>
             {
-                var account = ZammadAccount.CreateTokenAccount(schema, host, token);
+                var account = ZammadAccount.CreateTokenAccount(endpoint, token);
             });
         }
 
@@ -91,9 +105,9 @@ namespace Zammad.Client
             Assert.NotNull(client);
         }
 
-        public ZammadAccount CreateTestAccount()
+        private ZammadAccount CreateTestAccount()
         {
-            return ZammadAccount.CreateBasicAccount(TestConstants.AccountSchema, TestConstants.AccountHost, TestConstants.AccountUser, TestConstants.AccountPassword);
+            return ZammadAccount.CreateBasicAccount(TestConstants.AccountEndpoint, TestConstants.AccountUser, TestConstants.AccountPassword);
         }
     }
 }

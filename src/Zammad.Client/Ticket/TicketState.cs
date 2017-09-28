@@ -1,8 +1,9 @@
-using System;
 using Newtonsoft.Json;
+using System;
 
 namespace Zammad.Client.Ticket
 {
+    [JsonObject]
     public class TicketState
     {
         [JsonProperty("id")]

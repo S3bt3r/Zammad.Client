@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Net.Http;
 using Zammad.Client.Core;
 using Zammad.Client.Group;
 using Zammad.Client.OnlineNotification;
@@ -9,97 +8,147 @@ using Zammad.Client.User;
 
 namespace Zammad.Client
 {
+    /// <summary>
+    /// Represents a Zammad account with which clients can be created for Zammad resources.
+    /// </summary>
     public class ZammadAccount
     {
-        private string _schema;
-        private string _host;
-        private string _user;
-        private string _password;
-        private string _token;
-        private ZammadAuthMethod _authMethod;
+        private readonly Uri _endpoint;
+        private readonly ZammadAuthentication _authentication;
+        private readonly string _user;
+        private readonly string _password;
+        private readonly string _token;
 
-        public ZammadAccount(string schema, string host, ZammadAuthMethod authMethod, string user, string password, string token)
+        /// <summary>
+        /// Initializes a new instance of the <see cref="ZammadAccount"/> class.
+        /// </summary>
+        /// <param name="endpoint">The endpoint of the Zammad instance being used.</param>
+        /// <param name="authentication">Specifies the authentication method who is used for authentication.</param>
+        /// <param name="user">The user who is used for authentication.</param>
+        /// <param name="password">The password who is used for authentication.</param>
+        /// <param name="token">The token who is used for authentication.</param>
+        public ZammadAccount(Uri endpoint, ZammadAuthentication authentication, string user, string password, string token)
         {
-            if (string.Compare(schema, "http", true) != 0 && string.Compare(schema, "https", true) != 0)
+            ArgumentCheck.ThrowIfNull(endpoint, nameof(endpoint));
+
+            switch (authentication)
             {
-                throw new ArgumentException($"Parameter {nameof(schema)} must be http or https.");
+                case ZammadAuthentication.Basic:
+                    {
+                        ArgumentCheck.ThrowIfNullOrEmpty(user, nameof(user));
+                        ArgumentCheck.ThrowIfNullOrEmpty(password, nameof(password));
+                        break;
+                    }
+                case ZammadAuthentication.Token:
+                    {
+                        ArgumentCheck.ThrowIfNullOrEmpty(token, nameof(token));
+                        break;
+                    }
+                default:
+                    {
+                        throw new NotSupportedException($"Authentication \"{authentication}\" is not supported.");
+                    }
             }
 
-            if (string.IsNullOrEmpty(host))
-            {
-                throw new ArgumentNullException($"Parameter {nameof(host)} must be set and can not be empty.");
-            }
-
-            if (authMethod == ZammadAuthMethod.Basic)
-            {
-                if (string.IsNullOrEmpty(user))
-                {
-                    throw new ArgumentNullException($"Parameter {nameof(user)} must be set and can not be empty.");
-                }
-
-                if (string.IsNullOrEmpty(password))
-                {
-                    throw new ArgumentNullException($"Parameter {nameof(password)} must be set and can not be empty.");
-                }
-            }
-            else if (authMethod == ZammadAuthMethod.Token)
-            {
-                if (string.IsNullOrEmpty(token))
-                {
-                    throw new ArgumentNullException($"Parameter {nameof(token)} must be set and can not be empty.");
-                }
-            }
-
-            _schema = schema;
-            _host = host;
+            _endpoint = endpoint;
+            _authentication = authentication;
             _token = token;
             _user = user;
             _password = password;
-            _authMethod = authMethod;
         }
 
-        public string Schema => _schema;
-        public string Host => _host;
+        public Uri Endpoint => _endpoint;
+        public ZammadAuthentication Authentication => _authentication;
         public string User => _user;
         public string Password => _password;
         public string Token => _token;
-        public ZammadAuthMethod AuthMethod => _authMethod;
 
-        internal protected virtual HttpClient CreateHttpClient()
+        /// <summary>
+        /// Initializes a new instance of the <see cref="ZammadAccount"/> class that uses the basic authentication method.
+        /// </summary>
+        /// <param name="endpoint">The endpoint of the Zammad instance being used.</param>
+        /// <param name="user">The user who is used for authentication.</param>
+        /// <param name="password">The password who is used for authentication.</param>
+        /// <returns>A new instance of the <see cref="ZammadAccount"/> class that uses the basic authentication method.</returns>
+        public static ZammadAccount CreateBasicAccount(string endpoint, string user, string password)
         {
-            return new HttpClient(new HttpClientHandler(), true);
+            return CreateBasicAccount(new Uri(endpoint), user, password);
         }
 
-        public static ZammadAccount CreateBasicAccount(string schema, string host, string user, string password)
+        /// <summary>
+        /// Initializes a new instance of the <see cref="ZammadAccount"/> class that uses the token authentication method.
+        /// </summary>
+        /// <param name="endpoint">The endpoint of the Zammad instance being used.</param>
+        /// <param name="user">The user who is used for authentication.</param>
+        /// <param name="password">The password who is used for authentication.</param>
+        /// <returns>A new instance of the <see cref="ZammadAccount"/> class that uses the basic authentication method.</returns>
+        public static ZammadAccount CreateBasicAccount(Uri endpoint, string user, string password)
         {
-            return new ZammadAccount(schema, host, ZammadAuthMethod.Basic, user, password, null);
+            return new ZammadAccount(endpoint, ZammadAuthentication.Basic, user, password, null);
         }
 
-        public static ZammadAccount CreateTokenAccount(string schema, string host, string token)
+        /// <summary>
+        /// Initializes a new instance of the <see cref="ZammadAccount"/> class that uses the token authentication method.
+        /// </summary>
+        /// <param name="endpoint">The endpoint of the Zammad instance being used.</param>
+        /// <param name="token">The token who is used for authentication.</param>
+        /// <returns>A new instance of the <see cref="ZammadAccount"/> class that uses the token authentication method.</returns>
+        public static ZammadAccount CreateTokenAccount(string endpoint, string token)
         {
-            return new ZammadAccount(schema, host, ZammadAuthMethod.Token, null, null, token);
+            return CreateTokenAccount(new Uri(endpoint), token);
         }
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="ZammadAccount"/> class that uses the token authentication method.
+        /// </summary>
+        /// <param name="endpoint">The endpoint of the Zammad instance being used.</param>
+        /// <param name="token">The token who is used for authentication.</param>
+        /// <returns>A new instance of the <see cref="ZammadAccount"/> class that uses the token authentication method.</returns>
+        public static ZammadAccount CreateTokenAccount(Uri endpoint, string token)
+        {
+            return new ZammadAccount(endpoint, ZammadAuthentication.Token, null, null, token);
+        }
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="GroupClient"/> class.
+        /// </summary>
+        /// <returns>A new instance of the <see cref="GroupClient"/> class.</returns>
         public GroupClient CreateGroupClient()
         {
             return new GroupClient(this);
         }
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="OnlineNotificationClient"/> class.
+        /// </summary>
+        /// <returns>A new instance of the <see cref="OnlineNotificationClient"/> class.</returns>
         public OnlineNotificationClient CreateOnlineNotificationClient()
         {
             return new OnlineNotificationClient(this);
         }
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="OrganizationClient"/> class.
+        /// </summary>
+        /// <returns>A new instance of the <see cref="OrganizationClient"/> class.</returns>
         public OrganizationClient CreateOrganizationClient()
         {
             return new OrganizationClient(this);
         }
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="TicketClient"/> class.
+        /// </summary>
+        /// <returns>A new instance of the <see cref="TicketClient"/> class.</returns>
         public TicketClient CreateTicketClient()
         {
             return new TicketClient(this);
         }
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="UserClient"/> class.
+        /// </summary>
+        /// <returns>A new instance of the <see cref="UserClient"/> class.</returns>
         public UserClient CreateUserClient()
         {
             return new UserClient(this);

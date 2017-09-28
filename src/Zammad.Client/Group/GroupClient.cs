@@ -1,5 +1,4 @@
 ﻿using System.Collections.Generic;
-using System.Net.Http;
 using System.Threading.Tasks;
 using Zammad.Client.Core;
 
@@ -17,32 +16,32 @@ namespace Zammad.Client.Group
 
         public Task<IList<Group>> GetGroupListAsync()
         {
-            return ExecuteAsync<IList<Group>>(HttpMethod.Get, "/api/v1/groups");
+            return GetAsync<IList<Group>>("/api/v1/groups");
         }
 
         public Task<IList<Group>> GetGroupListAsync(int page, int count)
         {
-            return ExecuteAsync<IList<Group>>(HttpMethod.Get, "/api/v1/groups?page={page},per_page={count}");
+            return GetAsync<IList<Group>>("/api/v1/groups?page={page},per_page={count}");
         }
 
         public Task<Group> GetGroupAsync(int id)
         {
-            return ExecuteAsync<Group>(HttpMethod.Get, "/api/v1/groups/{id}");
+            return GetAsync<Group>("/api/v1/groups/{id}");
         }
 
         public Task<Group> CreateGroupAsync(Group group)
         {
-            return ExecuteAsync<Group>(HttpMethod.Post, "/api/v1/groups", group);
+            return PostAsync<Group>("/api/v1/groups", group);
         }
 
         public Task<Group> UpdateGroupAsync(int id, Group group)
         {
-            return ExecuteAsync<Group>(HttpMethod.Put, "/api/v1/groups/{id}", group);
+            return PutAsync<Group>("/api/v1/groups/{id}", group);
         }
 
         public Task<bool> DeleteGroupAsync(int id)
         {
-            return ExecuteAsync<bool>(HttpMethod.Delete, "/api/v1/groups/{id}");
+            return DeleteAsync("/api/v1/groups/{id}");
         }
 
         #endregion
