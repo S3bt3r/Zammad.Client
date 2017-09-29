@@ -8,8 +8,8 @@ namespace Zammad.Client.Core.Protocol
     public class TokenHttpClientHandlerTest
     {
         [Theory]
-        [InlineData("token1", "token=token1")]
-        [InlineData("token2", "token=token2")]
+        [InlineData("token", "token=token")]
+        [InlineData("TOKEN", "token=TOKEN")]
         public async Task TokenHttpClientHandler_Success_Test(string token, string expected)
         {
             using (var httpHandler = new TokenHttpClientHandler(token))

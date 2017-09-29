@@ -8,8 +8,8 @@ namespace Zammad.Client.Core.Protocol
     public class BasicHttpClientHandlerTest
     {
         [Theory]
-        [InlineData("user", "password", "dXNlcjpwYXNzd29yZA==")]
         [InlineData("zammad", "secure", "emFtbWFkOnNlY3VyZQ==")]
+        [InlineData("ZAMMAD", "SECURE", "WkFNTUFEOlNFQ1VSRQ==")]
         public async Task BasicHttpClientHandler_Success_Test(string user, string password, string expected)
         {
             using (var httpHandler = new BasicHttpClientHandler(user, password))
