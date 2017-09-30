@@ -70,3 +70,21 @@ Now, to get all tickets using the client:
 ```csharp
 var ticketList = ticketClient.GetTicketListAsync();
 ```
+
+Now, to create a ticket using the client:
+
+```csharp
+var ticket = await ticketClient.CreateTicketAsync(
+	new Ticket
+	{
+		Title = "Help me!",
+		GroupId = 1,
+		CustomerId = 1,
+	},
+	new TicketArticle
+	{
+		Subject = "Help me!!!",
+		Body = "Nothing Work!",
+		Type = "note",
+	});
+```

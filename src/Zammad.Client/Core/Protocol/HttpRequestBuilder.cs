@@ -120,7 +120,12 @@ namespace Zammad.Client.Core.Protocol
             using (var stringWriter = new StringWriter(jsonBuilder))
             using (var jsonWriter = new JsonTextWriter(stringWriter))
             {
-                var serializer = new JsonSerializer();
+                var serializer = new JsonSerializer
+                {
+                    DefaultValueHandling = DefaultValueHandling.IgnoreAndPopulate,
+                    NullValueHandling = NullValueHandling.Ignore
+                };
+
                 serializer.Serialize(jsonWriter, json);
             }
             _content = new StringContent(jsonBuilder.ToString());
