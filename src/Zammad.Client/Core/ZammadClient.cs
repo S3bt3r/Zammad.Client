@@ -37,6 +37,24 @@ namespace Zammad.Client.Core
                 .ParseJsonContentAsync<TResult>();
         }
 
+
+        protected async Task<bool> GetAsync(string path, string query)
+        {
+            var httpRequest = new HttpRequestBuilder()
+                .UseGet()
+                .UseRequestUri(_account.Endpoint)
+                .AddPath(path)
+                .UseQuery(query)
+                .Build();
+
+            var httpResponse = await SendHttpRequestAsync(httpRequest);
+            httpResponse.EnsureSuccessStatusCode();
+
+            return new HttpResponseParser()
+                .UseHttpResponse(httpResponse)
+                .ParseSuccessStatus();
+        }
+
         protected async Task<Stream> GetAsync(string path)
         {
             var httpRequest = new HttpRequestBuilder()
@@ -69,6 +87,23 @@ namespace Zammad.Client.Core
                 .ParseSuccessStatus();
         }
 
+        protected async Task<bool> PostAsync(string path, object content)
+        {
+            var httpRequest = new HttpRequestBuilder()
+                .UsePost()
+                .UseRequestUri(_account.Endpoint)
+                .AddPath(path)
+                .UseJsonContent(content)
+                .Build();
+
+            var httpResponse = await SendHttpRequestAsync(httpRequest);
+            httpResponse.EnsureSuccessStatusCode();
+
+            return new HttpResponseParser()
+                .UseHttpResponse(httpResponse)
+                .ParseSuccessStatus();
+        }
+
         protected async Task<TResult> PostAsync<TResult>(string path, object content)
         {
             var httpRequest = new HttpRequestBuilder()
@@ -84,6 +119,23 @@ namespace Zammad.Client.Core
             return await new HttpResponseParser()
                 .UseHttpResponse(httpResponse)
                 .ParseJsonContentAsync<TResult>();
+        }
+        
+        protected async Task<bool> PutAsync(string path, object content)
+        {
+            var httpRequest = new HttpRequestBuilder()
+                .UsePut()
+                .UseRequestUri(_account.Endpoint)
+                .AddPath(path)
+                .UseJsonContent(content)
+                .Build();
+
+            var httpResponse = await SendHttpRequestAsync(httpRequest);
+            httpResponse.EnsureSuccessStatusCode();
+
+            return new HttpResponseParser()
+                .UseHttpResponse(httpResponse)
+                .ParseSuccessStatus();
         }
 
         protected async Task<TResult> PutAsync<TResult>(string path, object content)
@@ -109,6 +161,23 @@ namespace Zammad.Client.Core
                 .UseDelete()
                 .UseRequestUri(_account.Endpoint)
                 .AddPath(path)
+                .Build();
+
+            var httpResponse = await SendHttpRequestAsync(httpRequest);
+            httpResponse.EnsureSuccessStatusCode();
+
+            return new HttpResponseParser()
+                .UseHttpResponse(httpResponse)
+                .ParseSuccessStatus();
+        }
+
+        protected async Task<bool> DeleteAsync(string path, string content)
+        {
+            var httpRequest = new HttpRequestBuilder()
+                .UseDelete()
+                .UseRequestUri(_account.Endpoint)
+                .AddPath(path)
+                .UseJsonContent(content)
                 .Build();
 
             var httpResponse = await SendHttpRequestAsync(httpRequest);
