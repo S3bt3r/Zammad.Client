@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.IO;
 using System.Threading.Tasks;
 using Zammad.Client.Core;
 using Zammad.Client.Ticket.Internal;
@@ -77,6 +78,11 @@ namespace Zammad.Client.Ticket
         public Task<TicketArticle> CreateTicketArticleAsync(TicketArticle article)
         {
             return PostAsync<TicketArticle>("/api/v1/ticket_articles", article);
+        }
+
+        public Task<Stream> GetTicketArticleAttachmentAsync(int ticketId, int articleId, int id)
+        {
+            return GetAsync($"/api/v1/ticket_attachment/{ticketId}/{articleId}/{id}");
         }
 
         #endregion

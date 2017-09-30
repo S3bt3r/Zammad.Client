@@ -66,5 +66,16 @@ namespace Zammad.Client.Core.Protocol
             }
             return content;
         }
+
+        public async Task<Stream> ParseStreamContentAsync()
+        {
+            if (_httpResponse.Content.Headers.ContentLength.HasValue &&
+                _httpResponse.Content.Headers.ContentLength == 0)
+            {
+                return Stream.Null;
+            }
+
+            return await _httpResponse.Content.ReadAsStreamAsync();
+        }
     }
 }

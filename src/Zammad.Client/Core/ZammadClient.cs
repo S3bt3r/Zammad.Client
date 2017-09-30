@@ -1,4 +1,5 @@
 using System;
+using System.IO;
 using System.Net.Http;
 using System.Threading.Tasks;
 using Zammad.Client.Core.Protocol;
@@ -34,6 +35,22 @@ namespace Zammad.Client.Core
             return await new HttpResponseParser()
                 .UseHttpResponse(httpResponse)
                 .ParseJsonContentAsync<TResult>();
+        }
+
+        protected async Task<Stream> GetAsync(string path)
+        {
+            var httpRequest = new HttpRequestBuilder()
+                .UseGet()
+                .UseRequestUri(_account.Endpoint)
+                .AddPath(path)
+                .Build();
+
+            var httpResponse = await SendHttpRequestAsync(httpRequest);
+            httpResponse.EnsureSuccessStatusCode();
+
+            return await new HttpResponseParser()
+                .UseHttpResponse(httpResponse)
+                .ParseStreamContentAsync();
         }
 
         protected async Task<bool> PostAsync(string path)
