@@ -61,7 +61,7 @@ using Zammad.Client.Ticket;
 To perform an operation you will first instantiate a *client* which allows performing actions on it.
 
 ```csharp
-var account = ZammadAccount.CreateBasicAccount("https", "contoso.zammad.com", "user", "password");
+var account = ZammadAccount.CreateBasicAccount("https://contoso.zammad.com", "user", "password");
 var ticketClient = account.CreateTicketClient();
 ```
 
