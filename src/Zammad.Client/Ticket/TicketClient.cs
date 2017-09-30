@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.IO;
 using System.Threading.Tasks;
 using Zammad.Client.Core;
 using Zammad.Client.Ticket.Internal;
@@ -22,7 +23,7 @@ namespace Zammad.Client.Ticket
 
         public Task<IList<Ticket>> GetTicketListAsync(int page, int count)
         {
-            return GetAsync<IList<Ticket>>("/api/v1/tickets?page={page},per_page={count}");
+            return GetAsync<IList<Ticket>>("/api/v1/tickets", $"?page={page},per_page={count}");
         }
 
         public Task<IList<Ticket>> SearchTicketAsync(string query, int limit)
@@ -61,7 +62,7 @@ namespace Zammad.Client.Ticket
 
         public Task<IList<TicketArticle>> GetTicketArticleListAsync(int page, int count)
         {
-            return GetAsync<IList<TicketArticle>>("/api/v1/ticket_articles?page={page},per_page={count}");
+            return GetAsync<IList<TicketArticle>>("/api/v1/ticket_articles", $"?page={page},per_page={count}");
         }
 
         public Task<IList<TicketArticle>> GetTicketArticleListForTicketAsync(int ticketId)
@@ -79,6 +80,11 @@ namespace Zammad.Client.Ticket
             return PostAsync<TicketArticle>("/api/v1/ticket_articles", article);
         }
 
+        public Task<Stream> GetTicketArticleAttachmentAsync(int ticketId, int articleId, int id)
+        {
+            return GetAsync($"/api/v1/ticket_attachment/{ticketId}/{articleId}/{id}");
+        }
+
         #endregion
 
         #region ITicketPriorityService
@@ -90,7 +96,7 @@ namespace Zammad.Client.Ticket
 
         public Task<IList<TicketPriority>> GetTicketPriorityListAsync(int page, int count)
         {
-            return GetAsync<IList<TicketPriority>>("/api/v1/ticket_priorities?page={page},per_page={count}");
+            return GetAsync<IList<TicketPriority>>("/api/v1/ticket_priorities", $"?page={page},per_page={count}");
         }
 
         public Task<TicketPriority> GetTicketPriorityAsync(int id)
@@ -124,7 +130,7 @@ namespace Zammad.Client.Ticket
 
         public Task<IList<TicketState>> GetTicketStateListAsync(int page, int count)
         {
-            return GetAsync<IList<TicketState>>("/api/v1/ticket_states?page={page},per_page={count}");
+            return GetAsync<IList<TicketState>>("/api/v1/ticket_states", $"?page={page},per_page={count}");
         }
 
         public Task<TicketState> GetTicketStateAsync(int id)

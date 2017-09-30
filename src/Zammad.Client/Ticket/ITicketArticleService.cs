@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.IO;
 using System.Threading.Tasks;
 
 namespace Zammad.Client.Ticket
@@ -10,5 +11,6 @@ namespace Zammad.Client.Ticket
         Task<IList<TicketArticle>> GetTicketArticleListForTicketAsync(int ticketId);
         Task<TicketArticle> GetTicketArticleAsync(int id);
         Task<TicketArticle> CreateTicketArticleAsync(TicketArticle article);
+        Task<Stream> GetTicketArticleAttachmentAsync(int ticketId, int articleId, int id);
     }
 }
