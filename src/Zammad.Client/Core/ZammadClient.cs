@@ -171,7 +171,7 @@ namespace Zammad.Client.Core
                 .ParseSuccessStatus();
         }
 
-        protected async Task<bool> DeleteAsync(string path, string content)
+        protected async Task<bool> DeleteAsync(string path, object content)
         {
             var httpRequest = new HttpRequestBuilder()
                 .UseDelete()
