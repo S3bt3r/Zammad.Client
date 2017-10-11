@@ -19,6 +19,12 @@ The Zammad Client Library for .NET allows you to connect your .NET application t
 - User
     - List/Get/Create/Update/Delete/Search/GetMe
 
+## Requirements
+The used target framework of Zammad Client Library for .NET is .NET Standard 2.0.
+Therefore, your application's target framework must have at least .NET Framework 4.6.1, .NET Core 2.0, or .NET Standard 2.0.
+
+[.NET Standard implementation support](https://docs.microsoft.com/en-us/dotnet/standard/net-standard#net-implementation-support)
+
 ## Download & Install
 The Client Library ships on NuGet. You'll find the latest version and hotfixes on NuGet via the `Zammad.Client` package.
 
@@ -48,7 +54,7 @@ dotnet add package Zammad.Client
 ### Newtonsoft Json
 The library depend on Newtonsoft Json, which can be downloaded directly or referenced by your code project through Nuget.
 
-- [Newtonsoft.Json] (http://www.nuget.org/packages/Newtonsoft.Json)
+- [Newtonsoft.Json](http://www.nuget.org/packages/Newtonsoft.Json)
 
 ## Code Samples
 
