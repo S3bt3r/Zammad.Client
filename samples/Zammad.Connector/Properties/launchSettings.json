@@ -1,0 +1,8 @@
+{
+  "profiles": {
+    "Zammad.Connector": {
+      "commandName": "Project",
+      "commandLineArgs": "Export-Ticket -ExportFolder Data"
+    }
+  }
+}
