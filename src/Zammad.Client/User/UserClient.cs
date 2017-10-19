@@ -36,7 +36,7 @@ namespace Zammad.Client.User
 
         public Task<User> GetUserAsync(int id)
         {
-            return GetAsync<User>("/api/v1/users/{id}");
+            return GetAsync<User>($"/api/v1/users/{id}");
         }
 
         public Task<User> CreateUserAsync(User user)
@@ -46,12 +46,12 @@ namespace Zammad.Client.User
 
         public Task<User> UpdateUserAsync(int id, User user)
         {
-            return PutAsync<User>("/api/v1/users/{id}", user);
+            return PutAsync<User>($"/api/v1/users/{id}", user);
         }
 
         public Task<bool> DeleteUserAsync(int id)
         {
-            return DeleteAsync("/api/v1/users/{id}");
+            return DeleteAsync($"/api/v1/users/{id}");
         }
 
         #endregion

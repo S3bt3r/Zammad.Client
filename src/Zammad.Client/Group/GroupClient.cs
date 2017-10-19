@@ -26,7 +26,7 @@ namespace Zammad.Client.Group
 
         public Task<Group> GetGroupAsync(int id)
         {
-            return GetAsync<Group>("/api/v1/groups/{id}");
+            return GetAsync<Group>($"/api/v1/groups/{id}");
         }
 
         public Task<Group> CreateGroupAsync(Group group)
@@ -36,12 +36,12 @@ namespace Zammad.Client.Group
 
         public Task<Group> UpdateGroupAsync(int id, Group group)
         {
-            return PutAsync<Group>("/api/v1/groups/{id}", group);
+            return PutAsync<Group>($"/api/v1/groups/{id}", group);
         }
 
         public Task<bool> DeleteGroupAsync(int id)
         {
-            return DeleteAsync("/api/v1/groups/{id}");
+            return DeleteAsync($"/api/v1/groups/{id}");
         }
 
         #endregion

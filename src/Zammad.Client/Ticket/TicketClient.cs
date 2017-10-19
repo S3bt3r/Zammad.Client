@@ -33,7 +33,7 @@ namespace Zammad.Client.Ticket
 
         public Task<Ticket> GetTicketAsync(int id)
         {
-            return GetAsync<Ticket>("/api/v1/tickets/{id}");
+            return GetAsync<Ticket>($"/api/v1/tickets/{id}");
         }
 
         public Task<Ticket> CreateTicketAsync(Ticket ticket, TicketArticle article)
@@ -43,12 +43,12 @@ namespace Zammad.Client.Ticket
 
         public Task<Ticket> UpdateTicketAsync(int id, Ticket ticket)
         {
-            return PutAsync<Ticket>("/api/v1/tickets/{id}", ticket);
+            return PutAsync<Ticket>($"/api/v1/tickets/{id}", ticket);
         }
 
         public Task<bool> DeleteTicketAsync(int id)
         {
-            return DeleteAsync("/api/v1/tickets/{id}");
+            return DeleteAsync($"/api/v1/tickets/{id}");
         }
 
         #endregion
@@ -67,12 +67,12 @@ namespace Zammad.Client.Ticket
 
         public Task<IList<TicketArticle>> GetTicketArticleListForTicketAsync(int ticketId)
         {
-            return GetAsync<IList<TicketArticle>>("/api/v1/ticket_articles/by_ticket/{ticketId}");
+            return GetAsync<IList<TicketArticle>>($"/api/v1/ticket_articles/by_ticket/{ticketId}");
         }
 
         public Task<TicketArticle> GetTicketArticleAsync(int id)
         {
-            return GetAsync<TicketArticle>("/api/v1/ticket_articles/{id}");
+            return GetAsync<TicketArticle>($"/api/v1/ticket_articles/{id}");
         }
 
         public Task<TicketArticle> CreateTicketArticleAsync(TicketArticle article)
@@ -101,7 +101,7 @@ namespace Zammad.Client.Ticket
 
         public Task<TicketPriority> GetTicketPriorityAsync(int id)
         {
-            return GetAsync<TicketPriority>("/api/v1/ticket_priorities/{id}");
+            return GetAsync<TicketPriority>($"/api/v1/ticket_priorities/{id}");
         }
 
         public Task<TicketPriority> CreateTicketPriorityAsync(TicketPriority priority)
@@ -111,12 +111,12 @@ namespace Zammad.Client.Ticket
 
         public Task<TicketPriority> UpdateTicketPriorityAsync(int id, TicketPriority priority)
         {
-            return PutAsync<TicketPriority>("/api/v1/ticket_priorities/{id}", priority);
+            return PutAsync<TicketPriority>($"/api/v1/ticket_priorities/{id}", priority);
         }
 
         public Task<bool> DeleteTicketPriorityAsync(int id)
         {
-            return DeleteAsync("/api/v1/ticket_priorities/{id}");
+            return DeleteAsync($"/api/v1/ticket_priorities/{id}");
         }
 
         #endregion
@@ -135,7 +135,7 @@ namespace Zammad.Client.Ticket
 
         public Task<TicketState> GetTicketStateAsync(int id)
         {
-            return GetAsync<TicketState>("/api/v1/ticket_states/{id}");
+            return GetAsync<TicketState>($"/api/v1/ticket_states/{id}");
         }
 
         public Task<TicketState> CreateTicketStateAsync(TicketState state)
@@ -145,12 +145,12 @@ namespace Zammad.Client.Ticket
 
         public Task<TicketState> UpdateTicketStateAsync(int id, TicketState state)
         {
-            return PutAsync<TicketState>("/api/v1/ticket_states/{id}", state);
+            return PutAsync<TicketState>($"/api/v1/ticket_states/{id}", state);
         }
 
         public Task<bool> DeleteTicketStateAsync(int id)
         {
-            return DeleteAsync("/api/v1/ticket_states/{id}");
+            return DeleteAsync($"/api/v1/ticket_states/{id}");
         }
 
         #endregion
