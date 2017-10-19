@@ -21,7 +21,7 @@ namespace Zammad.Client.Object
 
         public Task<Object> GetObjectAsync(int id)
         {
-            return GetAsync<Object>("/api/v1/object_manager_attributes/{id}");
+            return GetAsync<Object>($"/api/v1/object_manager_attributes/{id}");
         }
 
         public Task<Object> CreateObjectAsyc(Object @object)
@@ -31,7 +31,7 @@ namespace Zammad.Client.Object
 
         public Task<Object> UpdateObjectAsync(int id, Object @object)
         {
-            return PutAsync<Object>("/api/v1/object_manager_attributes/{id}", @object);
+            return PutAsync<Object>($"/api/v1/object_manager_attributes/{id}", @object);
         }
 
         public Task<bool> ExecuteMigrationAsync()
