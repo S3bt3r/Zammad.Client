@@ -1,8 +1,10 @@
 ﻿using Microsoft.Extensions.Logging;
+using System;
 using System.Threading.Tasks;
 using Zammad.Client;
 using Zammad.Connector.Core.Commands;
 using Zammad.Connector.Core.Commands.Annotations;
+using Zammad.Connector.Core.IO;
 
 namespace Zammad.Connector.Commands.Ticket
 {
@@ -10,16 +12,20 @@ namespace Zammad.Connector.Commands.Ticket
     public class ExportTicketCommand : ICommand
     {
         private readonly ZammadAccount _account;
+        private readonly IFileService _fileService;
+        private readonly ISerializerResolver _serializerResolver;
         private readonly ILogger<ExportTicketCommand> _logger;
 
-        public ExportTicketCommand(ZammadAccount account, ILogger<ExportTicketCommand> logger)
+        public ExportTicketCommand(ZammadAccount account, IFileService fileService, ISerializerResolver serializerResolver, ILogger<ExportTicketCommand> logger)
         {
             _account = account;
+            _fileService = fileService;
+            _serializerResolver = serializerResolver;
             _logger = logger;
         }
 
-        [CliCommandArgument("-ExportFolder", true)]
-        public string ExportFolder { get; set; }
+        [CliCommandArgument("-ExportFile", true)]
+        public string ExportFile { get; set; }
 
         public async Task ExecuteAsync()
         {
@@ -32,22 +38,79 @@ namespace Zammad.Connector.Commands.Ticket
 
             if (ticketList?.Count > 0)
             {
-                foreach(var ticket in ticketList)
-                {
-                    _logger.LogInformation("Processing ticket {0}...", ticket.Id);
-                    
-                    _logger.LogInformation("Retrieve all ticket articles for ticket {0}...", ticket.Id);
-                    var articleList = await ticketClient.GetTicketArticleListForTicketAsync(ticket.Id);
-                    _logger.LogInformation("{0} ticket articles were obtained.", articleList?.Count);
+                _logger.LogInformation("Create ticket export...");
+                var export = new ExportTicket();
 
-                    if (articleList?.Count > 0)
+                foreach (var ticket in ticketList)
+                {
+                    try
                     {
-                        foreach(var article in articleList)
+                        _logger.LogInformation("Processing ticket {0}...", ticket.Id);
+                        var ticketItem = CreateTicketItem(ticket);
+                        export.Tickets.Add(ticketItem);
+
+                        _logger.LogInformation("Retrieve all ticket articles for ticket {0}...", ticket.Id);
+                        var articleList = await ticketClient.GetTicketArticleListForTicketAsync(ticket.Id);
+                        _logger.LogInformation("{0} ticket articles were obtained.", articleList?.Count);
+
+                        if (articleList?.Count > 0)
                         {
-                            _logger.LogInformation("Processing ticket article {0} from ticket {1}...", article.Id, ticket.Id);
+                            foreach (var article in articleList)
+                            {
+                                _logger.LogInformation("Processing ticket article {0} from ticket {1}...", article.Id, ticket.Id);
+                                var articleItem = CreateArticleItem(article);
+                                ticketItem.Articles.Add(articleItem);
+                            }
                         }
                     }
+                    catch(Exception e)
+                    {
+                        _logger.LogError("Error by ticket {0}\r\n{1}", ticket.Id, e.Message);
+                    }
                 }
+
+                await WriteExportAsync(export);
+            }
+        }
+
+        private ExportTicketItem CreateTicketItem(Client.Ticket.Ticket ticket)
+        {
+            return new ExportTicketItem
+            {
+                Id = ticket.Id,
+                GroupId = ticket.GroupId,
+                PriorityId = ticket.PriorityId,
+                StateId = ticket.StateId,
+                OrganizationId = ticket.OrganizationId,
+                Number = ticket.Number,
+                Title = ticket.Title,
+                OwnerId = ticket.OwnerId,
+                CustomerId = ticket.CustomerId,
+                Note = ticket.Note,
+                Type = ticket.Type,
+                TimeUnit = ticket.TimeUnit,
+            };
+        }
+       
+        private ExportTicketArticleItem CreateArticleItem(Client.Ticket.TicketArticle article)
+        {
+            return new ExportTicketArticleItem
+            {
+                Id = article.Id,
+                Subject = article.Subject,
+                ContentType = article.ContentType,
+                Body = article.Body,
+                Internal = article.Internal,
+                Type = article.Type,
+            };
+        }
+
+        private async Task WriteExportAsync(ExportTicket export)
+        {
+            using (var fileStream = _fileService.CreateFile(ExportFile))
+            {
+                var serializer = _serializerResolver.Resolve(ExportFile);
+                await serializer.SerializeAsync(export, fileStream);
             }
         }
     }

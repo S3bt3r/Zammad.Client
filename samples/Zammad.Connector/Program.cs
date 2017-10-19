@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using Zammad.Client;
 using Zammad.Connector.Commands.Ticket;
 using Zammad.Connector.Core.Commands;
+using Zammad.Connector.Core.IO;
 
 namespace Zammad.Connector
 {
@@ -46,9 +47,16 @@ namespace Zammad.Connector
             
             // App
             services.AddScoped<App>();
+            services.Configure<AppOptions>(Configuration.GetSection("App"));
 
             // Zammad Account
             services.AddSingleton(CreateZammadAccount);
+
+            // IO
+            services.AddScoped<IFileService, DefaultFileService>();
+            services.AddScoped<ISerializerResolver, DefaultSerializerResolver>();
+            services.AddScoped<XmlSerializer>();
+            services.Configure<XmlSerializerOptions>(Configuration.GetSection("Xml"));
 
             // Commands
             services.AddScoped<ICommandResolver, CliCommandResolver>();
@@ -57,6 +65,7 @@ namespace Zammad.Connector
 
         private static void ConfigureLogging(ILoggingBuilder logging)
         {
+            logging.AddConfiguration(Configuration.GetSection("Logging"));
             logging.AddConsole();
         }
 

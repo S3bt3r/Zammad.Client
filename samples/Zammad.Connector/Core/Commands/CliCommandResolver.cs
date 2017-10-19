@@ -1,3 +1,4 @@
+using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,10 +10,12 @@ namespace Zammad.Connector.Core.Commands
     public class CliCommandResolver : ICommandResolver
     {
         private readonly IServiceProvider _serviceProvider;
+        private readonly ILogger<CliCommandResolver> _logger;
 
-        public CliCommandResolver(IServiceProvider serviceProvider)
+        public CliCommandResolver(IServiceProvider serviceProvider, ILogger<CliCommandResolver> logger)
         {
             _serviceProvider = serviceProvider;
+            _logger = logger;
         }
         
         public ICommand Resolve(string name, params string[] args)
@@ -31,6 +34,7 @@ namespace Zammad.Connector.Core.Commands
 
         private IEnumerable<Type> GetCommandTypes()
         {
+            _logger.LogDebug("Query existing commands...");
             return AppDomain.CurrentDomain
                 .GetAssemblies()
                 .SelectMany(a => a.GetTypes())
@@ -43,11 +47,13 @@ namespace Zammad.Connector.Core.Commands
             var commandTypes = GetCommandTypes();
             foreach (var commandType in commandTypes)
             {
+                _logger.LogDebug("Search command with name {0}...", name);
                 var commandAttribute = CliCommandAttribute.Extract(commandType);
                 if (commandAttribute != null)
                 {
                     if (string.Equals(commandAttribute.Name, name, StringComparison.InvariantCultureIgnoreCase))
                     {
+                        _logger.LogDebug("Create command with name {0}...", name);
                         return _serviceProvider.GetService(commandType);
                     }
                 }
@@ -57,6 +63,7 @@ namespace Zammad.Connector.Core.Commands
 
         private IEnumerable<PropertyInfo> GetProperties(Type commandType)
         {
+            _logger.LogDebug("Query command properties...");
             return commandType.GetProperties();
         }
 
@@ -71,6 +78,7 @@ namespace Zammad.Connector.Core.Commands
                     var isSet = false;
                     for (var i = 0; i < args.Length; i++)
                     {
+                        _logger.LogDebug("Set command property {0}...", argument.Name);
                         if (string.Equals(argument.Name, args[i], StringComparison.InvariantCultureIgnoreCase))
                         {
                             try
