@@ -4,20 +4,24 @@ The Zammad Client Library for .NET allows you to connect your .NET application t
 ## Features
 - Group
     - List/Get/Create/Update/Delete
+- Object
+    - List/Get/Create/Update/Execute migration
 - OnlineNotification
-    - List/Get/Create/Update/Delete/MarkAllAsRead
+    - List/Get/Create/Update/Delete/Mark all as read
 - Organization
     - List/Get/Create/Update/Delete/Search
+- Tag
+    - List/Search/Add/Remove/List Admin/Create Admin/Rename Admin/Delete Admin
 - Ticket
     - List/Get/Create/Update/Delete/Search
 - Ticket Article
-    - List/Get/Create/ListForTicket
+    - List/Get/Create/ListForTicket/Get Attachment
 - Ticket Priority
     - List/Get/Create/Update/Delete
 - Ticket State
     - List/Get/Create/Update/Delete
 - User
-    - List/Get/Create/Update/Delete/Search/GetMe
+    - List/Get/Create/Update/Delete/Search/Get Me
 
 ## Requirements
 The used target framework of Zammad Client Library for .NET is .NET Standard 2.0.

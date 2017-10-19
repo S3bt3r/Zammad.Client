@@ -26,7 +26,7 @@ namespace Zammad.Client.OnlineNotification
 
         public Task<OnlineNotification> GetOnlineNotificationAsync(int id)
         {
-            return GetAsync<OnlineNotification>("/api/v1/online_notifications/{id}");
+            return GetAsync<OnlineNotification>($"/api/v1/online_notifications/{id}");
         }
 
         public Task<OnlineNotification> CreateOnlineNotificationAsync(OnlineNotification notification)
@@ -36,12 +36,12 @@ namespace Zammad.Client.OnlineNotification
 
         public Task<OnlineNotification> UpdateOnlineNotificationAsync(int id, OnlineNotification notification)
         {
-            return PutAsync<OnlineNotification>("/api/v1/online_notifications/{id}", notification);
+            return PutAsync<OnlineNotification>($"/api/v1/online_notifications/{id}", notification);
         }
 
         public Task<bool> DeleteOnlineNotificationAsync(int id)
         {
-            return DeleteAsync("/api/v1/online_notifications/{id}");
+            return DeleteAsync($"/api/v1/online_notifications/{id}");
         }
 
         public Task<bool> MarkAllAsReadAsync()

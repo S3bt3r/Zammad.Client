@@ -1,6 +1,7 @@
 ﻿using System;
 using Zammad.Client.Core;
 using Zammad.Client.Group;
+using Zammad.Client.Object;
 using Zammad.Client.OnlineNotification;
 using Zammad.Client.Organization;
 using Zammad.Client.Ticket;
@@ -116,6 +117,15 @@ namespace Zammad.Client
         public GroupClient CreateGroupClient()
         {
             return new GroupClient(this);
+        }
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="ObjectClient"/> class.
+        /// </summary>
+        /// <returns>A new instance of the <see cref="ObjectClient"/> class.</returns>
+        public ObjectClient CreateObjectClient()
+        {
+            return new ObjectClient(this);
         }
 
         /// <summary>

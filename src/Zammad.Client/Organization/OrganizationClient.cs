@@ -31,7 +31,7 @@ namespace Zammad.Client.Organization
 
         public Task<Organization> GetOrganizationAsync(int id)
         {
-            return GetAsync<Organization>("/api/v1/organizations/{id}");
+            return GetAsync<Organization>($"/api/v1/organizations/{id}");
         }
 
         public Task<Organization> CreateOrganizationAsync(Organization organization)
@@ -41,12 +41,12 @@ namespace Zammad.Client.Organization
 
         public Task<Organization> UpdateOrganizationAsync(int id, Organization organization)
         {
-            return PutAsync<Organization>("/api/v1/organizations/{id}", organization);
+            return PutAsync<Organization>($"/api/v1/organizations/{id}", organization);
         }
 
         public Task<bool> DeleteOrganizationAsync(int id)
         {
-            return DeleteAsync("/api/v1/organizations/{id}");
+            return DeleteAsync($"/api/v1/organizations/{id}");
         }
 
         #endregion
