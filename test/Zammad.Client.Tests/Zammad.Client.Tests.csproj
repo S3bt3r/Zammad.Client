@@ -7,7 +7,7 @@
     <Description>Zammad Client Library for .NET</Description>
     <Authors>Asesjix</Authors>
     <PackageProjectUrl>https://github.com/Asesjix/Zammad-Client</PackageProjectUrl>
-    <PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>
+    <PackageRequireLicenseAcceptance>false</PackageRequireLicenseAcceptance>
     <PackageLicenseUrl>https://raw.githubusercontent.com/Asesjix/Zammad-Client/master/LICENSE</PackageLicenseUrl>
     <PackageTags>zammad</PackageTags>
     <RepositoryUrl>https://github.com/Asesjix/Zammad-Client</RepositoryUrl>
@@ -18,10 +18,10 @@
     <IsPackable>false</IsPackable>
   </PropertyGroup>
   <ItemGroup>
-    <PackageReference Include="Microsoft.NET.Test.Sdk" Version="15.3.0" />
-    <PackageReference Include="moq" Version="4.7.127" />
-    <PackageReference Include="xunit" Version="2.2.0" />
-    <PackageReference Include="xunit.runner.visualstudio" Version="2.2.0" />
+    <PackageReference Include="Microsoft.NET.Test.Sdk" Version="15.5.0" />
+    <PackageReference Include="moq" Version="4.8.0" />
+    <PackageReference Include="xunit" Version="2.3.1" />
+    <PackageReference Include="xunit.runner.visualstudio" Version="2.3.1" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\src\Zammad.Client\Zammad.Client.csproj" />

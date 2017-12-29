@@ -39,7 +39,7 @@ namespace Zammad.Client.Core.Protocol
                 .UseHttpResponse(httpResponse)
                 .ParseSuccessStatus();
 
-            Assert.Equal(true, success);
+            Assert.True(success);
         }
 
         [Fact]
@@ -84,29 +84,29 @@ namespace Zammad.Client.Core.Protocol
             Assert.Equal("Welcome to Zammad!", ticket.Title);
             Assert.Equal(1, ticket.OwnerId);
             Assert.Equal(2, ticket.CustomerId);
-            Assert.Equal(null, ticket.Note);
-            Assert.Equal(null, ticket.FirstResponseAt);
-            Assert.Equal(null, ticket.FirstResponseEscalationAt);
-            Assert.Equal(null, ticket.FirstResponseInMin);
-            Assert.Equal(null, ticket.FirstResponseDiffInMin);
-            Assert.Equal(null, ticket.CloseAt);
-            Assert.Equal(null, ticket.CloseEscalationAt);
-            Assert.Equal(null, ticket.CloseInMin);
-            Assert.Equal(null, ticket.CloseDiffInMin);
-            Assert.Equal(null, ticket.UpdateEscalationAt);
-            Assert.Equal(null, ticket.UpdateInMin);
-            Assert.Equal(null, ticket.UpdateDiffInMin);
+            Assert.Null(ticket.Note);
+            Assert.Null(ticket.FirstResponseAt);
+            Assert.Null(ticket.FirstResponseEscalationAt);
+            Assert.Null(ticket.FirstResponseInMin);
+            Assert.Null(ticket.FirstResponseDiffInMin);
+            Assert.Null(ticket.CloseAt);
+            Assert.Null(ticket.CloseEscalationAt);
+            Assert.Null(ticket.CloseInMin);
+            Assert.Null(ticket.CloseDiffInMin);
+            Assert.Null(ticket.UpdateEscalationAt);
+            Assert.Null(ticket.UpdateInMin);
+            Assert.Null(ticket.UpdateDiffInMin);
             Assert.Equal(DateTimeOffset.Parse("2017-09-25T14:50:50.946Z"), ticket.LastContactAt);
-            Assert.Equal(null, ticket.LastContactAgentAt);
+            Assert.Null(ticket.LastContactAgentAt);
             Assert.Equal(DateTimeOffset.Parse("2017-09-25T14:50:50.946Z"), ticket.LastContactCustomerAt);
-            Assert.Equal(null, ticket.LastOwnerUpdateAt);
+            Assert.Null(ticket.LastOwnerUpdateAt);
             Assert.Equal(5, ticket.CreateArticleTypeId);
             Assert.Equal(2, ticket.CreateArticleSenderId);
             Assert.Equal(1, ticket.ArticleCount);
-            Assert.Equal(null, ticket.EscalationAt);
-            Assert.Equal(null, ticket.PendingTime);
-            Assert.Equal(null, ticket.Type);
-            Assert.Equal(null, ticket.TimeUnit);
+            Assert.Null(ticket.EscalationAt);
+            Assert.Null(ticket.PendingTime);
+            Assert.Null(ticket.Type);
+            Assert.Null(ticket.TimeUnit);
             Assert.Equal(new Dictionary<string, object>(), ticket.Preferences);
             Assert.Equal(3, ticket.UpdatedById);
             Assert.Equal(2, ticket.CreatedById);
