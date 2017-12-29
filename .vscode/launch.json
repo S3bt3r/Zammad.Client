@@ -5,14 +5,14 @@
     "version": "0.2.0",
     "configurations": [
         {
-            "name": ".NET Core Launch (console)",
+            "name": ".NET Core Launch (Sample/Connector)",
             "type": "coreclr",
             "request": "launch",
-            "preLaunchTask": "build",
+            "preLaunchTask": "build-connector",
             // If you have changed target frameworks, make sure to update the program path.
-            "program": "${workspaceRoot}/test/Zammad.Client.Tests/bin/Debug/netcoreapp2.0/Zammad.Client.Tests.dll",
+            "program": "${workspaceFolder}/samples/Zammad.Connector/bin/Debug/netcoreapp2.0/Zammad.Connector.dll",
             "args": [],
-            "cwd": "${workspaceRoot}/test/Zammad.Client.Tests",
+            "cwd": "${workspaceFolder}/samples/Zammad.Connector/",
             // For more information about the 'console' field, see https://github.com/OmniSharp/omnisharp-vscode/blob/master/debugger-launchjson.md#console-terminal-window
             "console": "internalConsole",
             "stopAtEntry": false,
