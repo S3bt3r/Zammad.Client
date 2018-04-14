@@ -120,7 +120,7 @@ namespace Zammad.Client.Core
                 .UseHttpResponse(httpResponse)
                 .ParseJsonContentAsync<TResult>();
         }
-        
+
         protected async Task<bool> PutAsync(string path, object content)
         {
             var httpRequest = new HttpRequestBuilder()
@@ -205,8 +205,8 @@ namespace Zammad.Client.Core
         {
             switch (_account.Authentication)
             {
-                case ZammadAuthentication.Basic: return new BasicHttpClientHandler(_account.User, _account.Password);
-                case ZammadAuthentication.Token: return new TokenHttpClientHandler(_account.Token);
+                case ZammadAuthentication.Basic: return new BasicHttpClientHandler(_account.User, _account.Password, _account.OnBehalfOf);
+                case ZammadAuthentication.Token: return new TokenHttpClientHandler(_account.Token, _account.OnBehalfOf);
                 default: throw new NotImplementedException();
             }
         }

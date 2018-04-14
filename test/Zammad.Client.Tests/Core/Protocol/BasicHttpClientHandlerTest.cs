@@ -12,7 +12,7 @@ namespace Zammad.Client.Core.Protocol
         [InlineData("ZAMMAD", "SECURE", "WkFNTUFEOlNFQ1VSRQ==")]
         public async Task BasicHttpClientHandler_Success_Test(string user, string password, string expected)
         {
-            using (var httpHandler = new BasicHttpClientHandler(user, password))
+            using (var httpHandler = new BasicHttpClientHandler(user, password, null))
             using (var httpClient = new HttpClient(httpHandler))
             {
                 var response = await httpClient.GetAsync("http://zammad.com");
@@ -32,7 +32,7 @@ namespace Zammad.Client.Core.Protocol
         {
             Assert.ThrowsAny<ArgumentException>(() =>
             {
-                var httpHandler = new BasicHttpClientHandler(user, password);
+                var httpHandler = new BasicHttpClientHandler(user, password, null);
             });
         }
     }

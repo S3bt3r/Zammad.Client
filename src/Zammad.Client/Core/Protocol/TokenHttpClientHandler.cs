@@ -5,11 +5,12 @@ using System.Threading.Tasks;
 
 namespace Zammad.Client.Core.Protocol
 {
-    public class TokenHttpClientHandler : HttpClientHandler
+    public class TokenHttpClientHandler : HttpClientHandlerBase
     {
         private readonly AuthenticationHeaderValue _authenticationHeader;
 
-        public TokenHttpClientHandler(string token)
+        public TokenHttpClientHandler(string token, string onBehalfOf)
+            : base(onBehalfOf)
         {
             ArgumentCheck.ThrowIfNullOrEmpty(token, nameof(token));
 

@@ -19,6 +19,7 @@ namespace Zammad.Client
         private readonly string _user;
         private readonly string _password;
         private readonly string _token;
+        private string _onBehalfOf;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="ZammadAccount"/> class.
@@ -63,6 +64,7 @@ namespace Zammad.Client
         public string User => _user;
         public string Password => _password;
         public string Token => _token;
+        public string OnBehalfOf => _onBehalfOf;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="ZammadAccount"/> class that uses the basic authentication method.
@@ -108,6 +110,17 @@ namespace Zammad.Client
         public static ZammadAccount CreateTokenAccount(Uri endpoint, string token)
         {
             return new ZammadAccount(endpoint, ZammadAuthentication.Token, null, null, token);
+        }
+
+        /// <summary>
+        /// Instructs the <see cref="ZammadAccount"/> to set the X-On-Behalf-Of header on requests.
+        /// </summary>
+        /// <param name="user">One of the three possible values: user id, user login, user email</param>
+        /// <returns>A instance of the <see cref="ZammadAccount"/> class that uses the X-On-Behalf-Of header.</returns>
+        public ZammadAccount UseOnBehalfOf(string user)
+        {
+            _onBehalfOf = user;
+            return this;
         }
 
         /// <summary>
