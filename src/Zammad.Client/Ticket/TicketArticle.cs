@@ -32,7 +32,7 @@ namespace Zammad.Client.Ticket
         public string ReplyTo { get; set; }
 
         [JsonProperty("message_id")]
-        public int? MessageId { get; set; }
+        public string MessageId { get; set; }
 
         [JsonProperty("message_id_md5")]
         public string MessageIdMD5 { get; set; }

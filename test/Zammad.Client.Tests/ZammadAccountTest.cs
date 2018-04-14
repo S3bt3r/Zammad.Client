@@ -14,7 +14,7 @@ namespace Zammad.Client
             Assert.Equal(endpoint, account.Endpoint.AbsoluteUri);
             Assert.Equal(user, account.User);
             Assert.Equal(password, account.Password);
-            Assert.Equal(null, account.Token);
+            Assert.Null(account.Token);
         }
 
         [Theory]
@@ -45,8 +45,8 @@ namespace Zammad.Client
         {
             var account = ZammadAccount.CreateTokenAccount(endpoint, token);
             Assert.Equal(endpoint, account.Endpoint.AbsoluteUri);
-            Assert.Equal(null, account.User);
-            Assert.Equal(null, account.Password);
+            Assert.Null(account.User);
+            Assert.Null(account.Password);
             Assert.Equal(token, account.Token);
         }
 

@@ -1,16 +1,47 @@
 {
-    "version": "0.1.0",
-    "command": "dotnet",
-    "isShellCommand": true,
-    "args": [],
+    "version": "2.0.0",
     "tasks": [
         {
-            "taskName": "build",
+            "label": "build-connector",
+            "command": "dotnet",
+            "type": "process",
             "args": [
-                "${workspaceRoot}/test/Zammad.Client.Tests/Zammad.Client.Tests.csproj"
+                "build",
+                "${workspaceFolder}/samples/Zammad.Connector/Zammad.Connector.csproj"
             ],
-            "isBuildCommand": true,
-            "problemMatcher": "$msCompile"
-        }
+            "problemMatcher": "$msCompile",
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            }
+        },
+        {
+            "label": "build-sln",
+            "command": "dotnet",
+            "type": "process",
+            "args": [
+                "build",
+                "${workspaceFolder}/Zammad-Client.sln"
+            ],
+            "problemMatcher": "$msCompile",
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            }
+        },
+        {
+            "label": "test-client",
+            "command": "dotnet",
+            "type": "process",
+            "args": [
+                "test",
+                "${workspaceFolder}/test/Zammad.Client.Tests/Zammad.Client.Tests.csproj"
+            ],
+            "problemMatcher": "$msCompile",
+            "group": {
+                "kind": "test",
+                "isDefault": true
+            }
+        },
     ]
 }

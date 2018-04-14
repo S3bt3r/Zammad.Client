@@ -7,11 +7,12 @@ using System.Threading.Tasks;
 
 namespace Zammad.Client.Core.Protocol
 {
-    public class BasicHttpClientHandler : HttpClientHandler
+    public class BasicHttpClientHandler : HttpClientHandlerBase
     {
         private readonly AuthenticationHeaderValue _authenticationHeader;
 
-        public BasicHttpClientHandler(string user, string password)
+        public BasicHttpClientHandler(string user, string password, string onBehalfOf)
+            : base(onBehalfOf)
         {
             ArgumentCheck.ThrowIfNullOrEmpty(user, nameof(user));
             ArgumentCheck.ThrowIfNullOrEmpty(password, nameof(password));

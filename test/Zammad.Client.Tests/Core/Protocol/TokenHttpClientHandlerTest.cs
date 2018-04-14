@@ -12,7 +12,7 @@ namespace Zammad.Client.Core.Protocol
         [InlineData("TOKEN", "token=TOKEN")]
         public async Task TokenHttpClientHandler_Success_Test(string token, string expected)
         {
-            using (var httpHandler = new TokenHttpClientHandler(token))
+            using (var httpHandler = new TokenHttpClientHandler(token, null))
             using (var httpClient = new HttpClient(httpHandler))
             {
                 var response = await httpClient.GetAsync("http://zammad.com");
@@ -28,7 +28,7 @@ namespace Zammad.Client.Core.Protocol
         {
             Assert.ThrowsAny<ArgumentException>(() =>
             {
-                var httpHandler = new TokenHttpClientHandler(token);
+                var httpHandler = new TokenHttpClientHandler(token, null);
             });
         }
     }

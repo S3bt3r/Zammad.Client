@@ -20,7 +20,7 @@ namespace Zammad.Client.Ticket
         public int StateId { get; set; }
 
         [JsonProperty("organization_id")]
-        public int OrganizationId { get; set; }
+        public int? OrganizationId { get; set; }
 
         [JsonProperty("number")]
         public string Number { get; set; }

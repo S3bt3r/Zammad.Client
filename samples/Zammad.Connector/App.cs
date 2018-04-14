@@ -1,4 +1,5 @@
 using Microsoft.Extensions.Logging;
+using Microsoft.Extensions.Options;
 using System;
 using System.Linq;
 using System.Threading.Tasks;
@@ -9,11 +10,13 @@ namespace Zammad.Connector
     public class App
     {
         private readonly ICommandResolver _commandResolver;
+        private readonly AppOptions _options;
         private readonly ILogger _logger;
 
-        public App(ICommandResolver commandResolver, ILogger<App> logger)
+        public App(ICommandResolver commandResolver, IOptions<AppOptions> options, ILogger<App> logger)
         {
             _commandResolver = commandResolver;
+            _options = options.Value;
             _logger = logger;
         }
 
@@ -28,6 +31,11 @@ namespace Zammad.Connector
                 {
                     var command = _commandResolver.Resolve(name, args);
                     await command.ExecuteAsync();
+
+                    if (_options.AutoClose == false)
+                    {
+                        Console.ReadKey();
+                    }
                 }
                 catch(Exception e)
                 {
