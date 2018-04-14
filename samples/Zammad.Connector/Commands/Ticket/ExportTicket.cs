@@ -28,7 +28,7 @@ namespace Zammad.Connector.Commands.Ticket
         public int StateId { get; set; }
 
         [XmlElement("OrganizationId")]
-        public int OrganizationId { get; set; }
+        public int? OrganizationId { get; set; }
 
         [XmlElement("Number")]
         public string Number { get; set; }
@@ -64,7 +64,7 @@ namespace Zammad.Connector.Commands.Ticket
 
         [XmlElement("Subject")]
         public string Subject { get; set; }
-        
+
         [XmlElement("ContentType")]
         public string ContentType { get; set; }
 
