@@ -28,7 +28,7 @@ namespace Zammad.Client.Ticket
 
         public Task<IList<Ticket>> SearchTicketAsync(string query, int limit)
         {
-            return GetAsync<IList<Ticket>>("/api/v1/tickets", $"?query={query}&limit={limit}");
+            return GetAsync<IList<Ticket>>("/api/v1/tickets/search", $"?query={query}&limit={limit}");
         }
 
         public Task<Ticket> GetTicketAsync(int id)
