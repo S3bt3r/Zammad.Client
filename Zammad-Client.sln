@@ -12,6 +12,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Zammad.Client.Tests", "test
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "root", "root", "{4550DA0B-BF31-44B1-A4C2-0D0D88CD3806}"
 	ProjectSection(SolutionItems) = preProject
+		.editorconfig = .editorconfig
 		LICENSE = LICENSE
 		README.md = README.md
 	EndProjectSection
@@ -19,6 +20,8 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "samples", "samples", "{2FCC9B8E-D144-4E84-8440-746A3F0C18BA}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Zammad.Connector", "samples\Zammad.Connector\Zammad.Connector.csproj", "{6587C74A-9EB9-4165-93B5-51119672300E}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Zammad.Client.IntegrationTests", "test\Zammad.Client.IntegrationTests\Zammad.Client.IntegrationTests.csproj", "{1E827B0C-5A48-47B0-81EA-952275BCCA31}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -66,6 +69,18 @@ Global
 		{6587C74A-9EB9-4165-93B5-51119672300E}.Release|x64.Build.0 = Release|Any CPU
 		{6587C74A-9EB9-4165-93B5-51119672300E}.Release|x86.ActiveCfg = Release|Any CPU
 		{6587C74A-9EB9-4165-93B5-51119672300E}.Release|x86.Build.0 = Release|Any CPU
+		{1E827B0C-5A48-47B0-81EA-952275BCCA31}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1E827B0C-5A48-47B0-81EA-952275BCCA31}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1E827B0C-5A48-47B0-81EA-952275BCCA31}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{1E827B0C-5A48-47B0-81EA-952275BCCA31}.Debug|x64.Build.0 = Debug|Any CPU
+		{1E827B0C-5A48-47B0-81EA-952275BCCA31}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{1E827B0C-5A48-47B0-81EA-952275BCCA31}.Debug|x86.Build.0 = Debug|Any CPU
+		{1E827B0C-5A48-47B0-81EA-952275BCCA31}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1E827B0C-5A48-47B0-81EA-952275BCCA31}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1E827B0C-5A48-47B0-81EA-952275BCCA31}.Release|x64.ActiveCfg = Release|Any CPU
+		{1E827B0C-5A48-47B0-81EA-952275BCCA31}.Release|x64.Build.0 = Release|Any CPU
+		{1E827B0C-5A48-47B0-81EA-952275BCCA31}.Release|x86.ActiveCfg = Release|Any CPU
+		{1E827B0C-5A48-47B0-81EA-952275BCCA31}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -74,6 +89,7 @@ Global
 		{640CD5CB-94E8-46E0-A5F4-618D29E6F5F3} = {8784B7B1-BCB5-4244-A8F3-4673C48BFFF3}
 		{5D50220E-F5B7-41ED-9A6E-CC77DDA27EB0} = {F55A4A90-BA88-47E0-9F5A-BE291AB50000}
 		{6587C74A-9EB9-4165-93B5-51119672300E} = {2FCC9B8E-D144-4E84-8440-746A3F0C18BA}
+		{1E827B0C-5A48-47B0-81EA-952275BCCA31} = {F55A4A90-BA88-47E0-9F5A-BE291AB50000}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {D390434B-797E-4D71-9F22-B79EE040E690}

@@ -26,7 +26,7 @@ namespace Zammad.Client.Organization
 
         public Task<IList<Organization>> SearchOrganizationAsync(string query, int limit)
         {
-            return GetAsync<IList<Organization>>("/api/v1/organizations", $"?query={query}&limit={limit}");
+            return GetAsync<IList<Organization>>("/api/v1/organizations/search", $"?query={query}&limit={limit}&expand=true");
         }
 
         public Task<Organization> GetOrganizationAsync(int id)

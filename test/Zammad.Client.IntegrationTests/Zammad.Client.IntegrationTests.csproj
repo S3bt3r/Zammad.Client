@@ -1,6 +1,6 @@
 <Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
-    <AssemblyTitle>Zammad.Client.Tests</AssemblyTitle>
+    <AssemblyTitle>Zammad.Client.IntegrationTests</AssemblyTitle>
     <Version>1.0.0</Version>
     <NeutralLanguage>en-US</NeutralLanguage>
     <Product>Zammad Client</Product>
@@ -17,17 +17,18 @@
   <PropertyGroup>
     <TargetFramework>netcoreapp2.0</TargetFramework>
     <IsPackable>false</IsPackable>
+    <RootNamespace>Zammad.Client.IntegrationTests</RootNamespace>
   </PropertyGroup>
   
   <ItemGroup>
     <PackageReference Include="Microsoft.NET.Test.Sdk" Version="15.7.2" />
-    <PackageReference Include="moq" Version="4.8.2" />
     <PackageReference Include="xunit" Version="2.3.1" />
     <PackageReference Include="xunit.runner.visualstudio" Version="2.3.1" />
+    <DotNetCliToolReference Include="dotnet-xunit" Version="2.3.1" />
   </ItemGroup>
   
   <ItemGroup>
     <ProjectReference Include="..\..\src\Zammad.Client\Zammad.Client.csproj" />
   </ItemGroup>
-  
+
 </Project>
