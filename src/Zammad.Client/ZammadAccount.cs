@@ -1,11 +1,5 @@
 ﻿using System;
 using Zammad.Client.Core;
-using Zammad.Client.Group;
-using Zammad.Client.Object;
-using Zammad.Client.OnlineNotification;
-using Zammad.Client.Organization;
-using Zammad.Client.Ticket;
-using Zammad.Client.User;
 
 namespace Zammad.Client
 {
@@ -14,13 +8,6 @@ namespace Zammad.Client
     /// </summary>
     public class ZammadAccount
     {
-        private readonly Uri _endpoint;
-        private readonly ZammadAuthentication _authentication;
-        private readonly string _user;
-        private readonly string _password;
-        private readonly string _token;
-        private string _onBehalfOf;
-
         /// <summary>
         /// Initializes a new instance of the <see cref="ZammadAccount"/> class.
         /// </summary>
@@ -52,19 +39,19 @@ namespace Zammad.Client
                     }
             }
 
-            _endpoint = endpoint;
-            _authentication = authentication;
-            _token = token;
-            _user = user;
-            _password = password;
+            Endpoint = endpoint;
+            Authentication = authentication;
+            Token = token;
+            User = user;
+            Password = password;
         }
 
-        public Uri Endpoint => _endpoint;
-        public ZammadAuthentication Authentication => _authentication;
-        public string User => _user;
-        public string Password => _password;
-        public string Token => _token;
-        public string OnBehalfOf => _onBehalfOf;
+        public Uri Endpoint { get; }
+        public ZammadAuthentication Authentication { get; }
+        public string User { get; }
+        public string Password { get; }
+        public string Token { get; }
+        public string OnBehalfOf { get; private set; }
 
         /// <summary>
         /// Initializes a new instance of the <see cref="ZammadAccount"/> class that uses the basic authentication method.
@@ -119,7 +106,7 @@ namespace Zammad.Client
         /// <returns>A instance of the <see cref="ZammadAccount"/> class that uses the X-On-Behalf-Of header.</returns>
         public ZammadAccount UseOnBehalfOf(string user)
         {
-            _onBehalfOf = user;
+            OnBehalfOf = user;
             return this;
         }
 

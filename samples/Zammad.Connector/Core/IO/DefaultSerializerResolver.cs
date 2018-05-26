@@ -1,8 +1,8 @@
-﻿using Microsoft.Extensions.Logging;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using Microsoft.Extensions.Logging;
 using Zammad.Connector.Core.IO.Annotations;
 
 namespace Zammad.Connector.Core.IO
