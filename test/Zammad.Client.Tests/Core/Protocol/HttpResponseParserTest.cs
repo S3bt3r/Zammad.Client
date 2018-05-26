@@ -6,6 +6,7 @@ using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
 using Xunit;
+using Zammad.Client.Resources;
 
 namespace Zammad.Client.Core.Protocol
 {
@@ -73,7 +74,7 @@ namespace Zammad.Client.Core.Protocol
 
             var ticket = await new HttpResponseParser()
                 .UseHttpResponse(httpResponse)
-                .ParseJsonContentAsync<Ticket.Ticket>();
+                .ParseJsonContentAsync<Ticket>();
 
             Assert.Equal(1, ticket.Id);
             Assert.Equal(1, ticket.GroupId);

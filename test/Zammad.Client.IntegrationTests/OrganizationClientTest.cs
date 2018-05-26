@@ -1,5 +1,6 @@
 using System.Threading.Tasks;
 using Xunit;
+using Zammad.Client.Resources;
 
 namespace Zammad.Client.IntegrationTests
 {
@@ -29,7 +30,7 @@ namespace Zammad.Client.IntegrationTests
             var account = TestHelper.CreateTestAccount();
             var client = account.CreateOrganizationClient();
             
-            var organization1 = await client.CreateOrganizationAsync(new Organization.Organization
+            var organization1 = await client.CreateOrganizationAsync(new Organization
             {
                 Name = "Krusty Burger",
                 Shared = true,
@@ -38,7 +39,7 @@ namespace Zammad.Client.IntegrationTests
                 Active = true
             });
 
-            var organization2 = await client.CreateOrganizationAsync(new Organization.Organization
+            var organization2 = await client.CreateOrganizationAsync(new Organization
             {
                 Name = "Springfield Nuclear Power Plant",
                 Shared = true,
@@ -47,7 +48,7 @@ namespace Zammad.Client.IntegrationTests
                 Active = true
             });
 
-            var organization3 = await client.CreateOrganizationAsync(new Organization.Organization
+            var organization3 = await client.CreateOrganizationAsync(new Organization
             {
                 Name = "Springfield Elementary School",
                 Shared = true,

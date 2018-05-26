@@ -66,7 +66,7 @@ First, include the classes you need (in this case we'll include the Client and T
 
 ```csharp
 using Zammad.Client;
-using Zammad.Client.Ticket;
+using Zammad.Client.Resources;
 ```
 To perform an operation you will first instantiate a *client* which allows performing actions on it.
 

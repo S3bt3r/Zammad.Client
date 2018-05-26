@@ -1,5 +1,5 @@
-﻿using Microsoft.Extensions.Logging;
-using System.IO;
+﻿using System.IO;
+using Microsoft.Extensions.Logging;
 
 namespace Zammad.Connector.Core.IO
 {
