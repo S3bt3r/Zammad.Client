@@ -101,7 +101,8 @@ namespace Zammad.Client.Core.Protocol
             var queryBuilder = new StringBuilder(_requestUriBuilder.Query);
             if (queryBuilder.Length == 0)
             {
-                queryBuilder.Append('?');
+                //This seems to destroy the uri
+                //queryBuilder.Append('?');
             }
             else
             {
