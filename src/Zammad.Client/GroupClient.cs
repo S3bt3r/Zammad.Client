@@ -23,7 +23,7 @@ namespace Zammad.Client
 
         public Task<IList<Group>> GetGroupListAsync(int page, int count)
         {
-            return GetAsync<IList<Group>>("/api/v1/groups", $"?page={page},per_page={count}");
+            return GetAsync<IList<Group>>("/api/v1/groups", $"page={page},per_page={count}");
         }
 
         public Task<Group> GetGroupAsync(int id)

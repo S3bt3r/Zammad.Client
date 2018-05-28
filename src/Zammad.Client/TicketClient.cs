@@ -25,12 +25,12 @@ namespace Zammad.Client
 
         public Task<IList<Ticket>> GetTicketListAsync(int page, int count)
         {
-            return GetAsync<IList<Ticket>>("/api/v1/tickets", $"?page={page},per_page={count}");
+            return GetAsync<IList<Ticket>>("/api/v1/tickets", $"page={page},per_page={count}");
         }
 
         public Task<IList<Ticket>> SearchTicketAsync(string query, int limit)
         {
-            return GetAsync<IList<Ticket>>("/api/v1/tickets/search", $"?query={query}&limit={limit}&expand=true");
+            return GetAsync<IList<Ticket>>("/api/v1/tickets/search", $"query={query}&limit={limit}&expand=true");
         }
 
         public Task<Ticket> GetTicketAsync(int id)
@@ -64,7 +64,7 @@ namespace Zammad.Client
 
         public Task<IList<TicketArticle>> GetTicketArticleListAsync(int page, int count)
         {
-            return GetAsync<IList<TicketArticle>>("/api/v1/ticket_articles", $"?page={page},per_page={count}");
+            return GetAsync<IList<TicketArticle>>("/api/v1/ticket_articles", $"page={page},per_page={count}");
         }
 
         public Task<IList<TicketArticle>> GetTicketArticleListForTicketAsync(int ticketId)
@@ -98,7 +98,7 @@ namespace Zammad.Client
 
         public Task<IList<TicketPriority>> GetTicketPriorityListAsync(int page, int count)
         {
-            return GetAsync<IList<TicketPriority>>("/api/v1/ticket_priorities", $"?page={page},per_page={count}");
+            return GetAsync<IList<TicketPriority>>("/api/v1/ticket_priorities", $"page={page},per_page={count}");
         }
 
         public Task<TicketPriority> GetTicketPriorityAsync(int id)
@@ -132,7 +132,7 @@ namespace Zammad.Client
 
         public Task<IList<TicketState>> GetTicketStateListAsync(int page, int count)
         {
-            return GetAsync<IList<TicketState>>("/api/v1/ticket_states", $"?page={page},per_page={count}");
+            return GetAsync<IList<TicketState>>("/api/v1/ticket_states", $"page={page},per_page={count}");
         }
 
         public Task<TicketState> GetTicketStateAsync(int id)
