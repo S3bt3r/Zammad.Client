@@ -19,23 +19,23 @@ namespace Zammad.Client
         
         public async Task<IList<Tag>> GetTagListAsync(string objectName, int objectId)
         {
-            var tagList = await GetAsync<TagList>("/api/v1/tags", $"?object={objectName}&o_id={objectId}");
+            var tagList = await GetAsync<TagList>("/api/v1/tags", $"object={objectName}&o_id={objectId}");
             return tagList.Tags;
         }
 
         public Task<IList<Tag>> SearchTagAsync(string term)
         {
-            return GetAsync<IList<Tag>>("/api/v1/tag_search", $"?term={term}");
+            return GetAsync<IList<Tag>>("/api/v1/tag_search", $"term={term}");
         }
 
         public Task<bool> AddTagAsync(string objectName, int objectId, string tagName)
         {
-            return GetAsync("/api/v1/tags/add", $"?object={objectName}&o_id={objectId}&item={tagName}");
+            return GetAsync("/api/v1/tags/add", $"object={objectName}&o_id={objectId}&item={tagName}");
         }
 
         public Task<bool> RemoveTagAsync(string objectName, int objectId, string tagName)
         {
-            return GetAsync("/api/v1/tags/remove", $"?object={objectName}&o_id={objectId}&item={tagName}");
+            return GetAsync("/api/v1/tags/remove", $"object={objectName}&o_id={objectId}&item={tagName}");
         }
 
         public Task<IList<Tag>> GetTagListAdminAsync()

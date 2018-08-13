@@ -28,12 +28,12 @@ namespace Zammad.Client
 
         public Task<IList<User>> GetUserListAsync(int page, int count)
         {
-            return GetAsync<IList<User>>("/api/v1/users", $"?page={page},per_page={count}");
+            return GetAsync<IList<User>>("/api/v1/users", $"page={page},per_page={count}");
         }
 
         public Task<IList<User>> SearchUserAsync(string query, int limit)
         {
-            return GetAsync<IList<User>>("/api/v1/users/search", $"?query={query}&limit={limit}&expand=true");
+            return GetAsync<IList<User>>("/api/v1/users/search", $"query={query}&limit={limit}&expand=true");
         }
 
         public Task<User> GetUserAsync(int id)

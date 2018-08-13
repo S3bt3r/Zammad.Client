@@ -122,7 +122,6 @@ namespace Zammad.Client.Core.Protocol
             {
                 var serializer = new JsonSerializer
                 {
-                    DefaultValueHandling = DefaultValueHandling.IgnoreAndPopulate,
                     NullValueHandling = NullValueHandling.Ignore
                 };
 
