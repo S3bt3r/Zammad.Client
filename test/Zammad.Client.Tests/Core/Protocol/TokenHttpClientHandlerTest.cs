@@ -15,7 +15,7 @@ namespace Zammad.Client.Core.Protocol
             using (var httpHandler = new TokenHttpClientHandler(token, null))
             using (var httpClient = new HttpClient(httpHandler))
             {
-                var response = await httpClient.GetAsync("http://zammad.com");
+                var response = await httpClient.GetAsync("https://zammad.com");
                 Assert.Equal("Token", response.RequestMessage.Headers.Authorization.Scheme);
                 Assert.Equal(expected, response.RequestMessage.Headers.Authorization.Parameter);
             }
