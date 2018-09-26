@@ -14,7 +14,7 @@ namespace Zammad.Client.Resources
         public int TicketId { get; set; }
 
         [JsonProperty("sender_id")]
-        public int SenderId { get; set; }
+        public int? SenderId { get; set; }
 
         [JsonProperty("from")]
         public string From { get; set; }
@@ -56,10 +56,10 @@ namespace Zammad.Client.Resources
         public IDictionary<string, object> Preferences { get; set; }
 
         [JsonProperty("updated_by_id")]
-        public int UpdatedById { get; set; }
+        public int? UpdatedById { get; set; }
 
         [JsonProperty("created_by_id")]
-        public int CreatedById { get; set; }
+        public int? CreatedById { get; set; }
 
         [JsonProperty("origin_by_id")]
         public int? OriginById { get; set; }
