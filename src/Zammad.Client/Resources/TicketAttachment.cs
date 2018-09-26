@@ -12,6 +12,12 @@ namespace Zammad.Client.Resources
         [JsonProperty("filename")]
         public string Filename { get; set; }
 
+        [JsonProperty("data")]
+        public string Data { get; set; }
+
+        [JsonProperty("mime-type")]
+        public string MimeType { get; set; }
+
         [JsonProperty("preferences")]
         public IDictionary<string, object> Preferences { get; set; }
     }
