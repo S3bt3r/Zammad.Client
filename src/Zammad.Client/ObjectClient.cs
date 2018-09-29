@@ -15,7 +15,7 @@ namespace Zammad.Client
         }
 
         #region IObjectService
-        
+
         public Task<IList<Object>> GetObjectListAsync()
         {
             return GetAsync<IList<Object>>("/api/v1/object_manager_attributes");
@@ -38,7 +38,7 @@ namespace Zammad.Client
 
         public Task<bool> ExecuteMigrationAsync()
         {
-            return PostAsync("/api/v1/object_manager_attributes_execute_migrations");
+            return PostAsync<bool>("/api/v1/object_manager_attributes_execute_migrations");
         }
 
         #endregion

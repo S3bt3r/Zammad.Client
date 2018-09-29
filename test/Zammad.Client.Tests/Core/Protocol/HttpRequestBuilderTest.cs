@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Net.Http;
 using System.Threading.Tasks;
 using Xunit;
@@ -136,19 +136,6 @@ namespace Zammad.Client.Core.Protocol
         }
 
         [Theory]
-        [InlineData(null)]
-        public void UseQuery_Fail_Test(string query)
-        {
-            Assert.ThrowsAny<ArgumentException>(() =>
-            {
-                var httpRequest = new HttpRequestBuilder()
-                .UseGet()
-                    .UseQuery(query)
-                    .Build();
-            });
-        }
-
-        [Theory]
         [InlineData("query", "zammad", "?query=zammad")]
         [InlineData("query", "", "?query=")]
         public void AddQuery_Success_Test(string key, string value, string expected)
@@ -188,20 +175,7 @@ namespace Zammad.Client.Core.Protocol
             var testContent = await httpRequest.Content.ReadAsStringAsync();
             Assert.Equal(expected, testContent);
         }
-
-        [Theory]
-        [InlineData(null)]
-        public void UseJsonContent_Fail_Test(string content)
-        {
-            Assert.ThrowsAny<ArgumentException>(() =>
-            {
-                var httpRequest = new HttpRequestBuilder()
-                    .UsePost()
-                    .UseJsonContent(content)
-                    .Build();
-            });
-        }
-
+        
         [Theory]
         [InlineData("http://test.zammad.com", "/api/tickets", "expand=true", "zammad", "http://test.zammad.com/api/tickets?expand=true", "\"zammad\"")]
         [InlineData("http://test.zammad.com", "/api/tickets", "", "zammad", "http://test.zammad.com/api/tickets", "\"zammad\"")]

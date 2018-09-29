@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.IO;
 using System.Net.Http;
 using System.Net.Http.Headers;
@@ -87,8 +87,10 @@ namespace Zammad.Client.Core.Protocol
 
         public HttpRequestBuilder UseQuery(string query)
         {
-            ArgumentCheck.ThrowIfNull(query, nameof(query));
-
+            if (query == null)
+            {
+                query = string.Empty;
+            }
             _requestUriBuilder.Query = query;
             return this;
         }
@@ -107,14 +109,18 @@ namespace Zammad.Client.Core.Protocol
             {
                 queryBuilder.Append('&');
             }
-            queryBuilder.AppendFormat("{0}={1}", key, value);
+            queryBuilder.AppendFormat("{0}={1}", key, Uri.EscapeDataString(value));
             _requestUriBuilder.Query = queryBuilder.ToString();
             return this;
         }
 
         public HttpRequestBuilder UseJsonContent(object json)
         {
-            ArgumentCheck.ThrowIfNull(json, nameof(json));
+            if (json == null)
+            {
+                _content = null;
+                return this;
+            }
 
             var jsonBuilder = new StringBuilder();
             using (var stringWriter = new StringWriter(jsonBuilder))
@@ -140,7 +146,6 @@ namespace Zammad.Client.Core.Protocol
                 RequestUri = _requestUriBuilder.Uri,
                 Content = _content
             };
-
             return httpRequest;
         }
     }

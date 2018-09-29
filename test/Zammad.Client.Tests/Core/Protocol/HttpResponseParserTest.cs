@@ -56,18 +56,6 @@ namespace Zammad.Client.Core.Protocol
         }
 
         [Fact]
-        public void ParseStatusCodeValue_Success_Test()
-        {
-            var httpResponse = CreateTestResponse();
-
-            var statusCode = new HttpResponseParser()
-                .UseHttpResponse(httpResponse)
-                .ParseStatusCodeValue();
-
-            Assert.Equal(200, statusCode);
-        }
-
-        [Fact]
         public async Task ParseJsonContentAsync_Success_TestAsync()
         {
             var httpResponse = CreateTestResponse();

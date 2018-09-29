@@ -1,4 +1,4 @@
-namespace Zammad.Client.Core
+﻿namespace Zammad.Client.Core
 {
     public enum ZammadAuthentication
     {
