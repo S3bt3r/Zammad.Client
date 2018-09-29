@@ -1,4 +1,4 @@
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
 using Xunit;
 using Zammad.Client.Resources;
 
@@ -19,6 +19,7 @@ namespace Zammad.Client.IntegrationTests
                     Title = "Help me!",
                     GroupId = 1,
                     CustomerId = 1,
+                    OwnerId = 1
                 },
                 new TicketArticle
                 {

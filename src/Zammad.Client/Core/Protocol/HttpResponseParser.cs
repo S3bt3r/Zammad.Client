@@ -75,22 +75,22 @@ namespace Zammad.Client.Core.Protocol
 
         public async Task<TResult> ParseAsync<TResult>()
         {
-            var result = default(TResult);
-            switch (result)
+            var result = default(object);
+            switch (typeof(TResult).Name)
             {
-                case bool boolean:
+                case nameof(Boolean):
                     {
-                        boolean = ParseSuccessStatus();
+                        result = ParseSuccessStatus();
                         break;
                     }
-                case HttpStatusCode httpStatus:
+                case nameof(HttpStatusCode):
                     {
-                        httpStatus = ParseStatusCode();
+                        result = ParseStatusCode();
                         break;
                     }
-                case Stream stream:
+                case nameof(Stream):
                     {
-                        stream = await ParseStreamContentAsync();
+                        result = await ParseStreamContentAsync();
                         break;
                     }
                 default:
@@ -99,7 +99,7 @@ namespace Zammad.Client.Core.Protocol
                         break;
                     }
             }
-            return result;
+            return (TResult)result;
         }
     }
 }

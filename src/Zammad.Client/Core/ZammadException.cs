@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Net;
 using System.Net.Http;
+using System.Threading.Tasks;
 
 namespace Zammad.Client.Core
 {
@@ -21,5 +22,10 @@ namespace Zammad.Client.Core
         public HttpRequestMessage Request { get; }
         public HttpResponseMessage Response { get; }
         public HttpStatusCode? Code => Response?.StatusCode;
+
+        public async Task<string> GetResponseContentAsStringAsync()
+        {
+            return await Response?.Content?.ReadAsStringAsync();
+        }
     }
 }

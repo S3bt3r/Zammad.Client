@@ -90,6 +90,7 @@ var ticket = await ticketClient.CreateTicketAsync(
 		Title = "Help me!",
 		GroupId = 1,
 		CustomerId = 1,
+		OwnerId = 1,
 	},
 	new TicketArticle
 	{
