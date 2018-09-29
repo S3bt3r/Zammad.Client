@@ -80,8 +80,8 @@ namespace Zammad.Connector.Commands
             {
                 Id = ticket.Id,
                 GroupId = ticket.GroupId,
-                PriorityId = ticket.PriorityId,
-                StateId = ticket.StateId,
+                PriorityId = ticket.PriorityId ?? 0,
+                StateId = ticket.StateId ?? 0,
                 OrganizationId = ticket.OrganizationId,
                 Number = ticket.Number,
                 Title = ticket.Title,

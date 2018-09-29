@@ -1,5 +1,4 @@
-using System;
-using System.IO;
+﻿using System;
 using System.Net.Http;
 using System.Threading.Tasks;
 using Zammad.Client.Core.Protocol;
@@ -15,184 +14,21 @@ namespace Zammad.Client.Core
             _account = account ?? throw new ArgumentNullException(nameof(account));
         }
 
-        protected Task<TResult> GetAsync<TResult>(string path)
+        protected HttpRequestBuilder NewRequest()
         {
-            return GetAsync<TResult>(path, string.Empty);
+            return new HttpRequestBuilder();
         }
 
-        protected async Task<TResult> GetAsync<TResult>(string path, string query)
-        {
-            var httpRequest = new HttpRequestBuilder()
-                .UseGet()
-                .UseRequestUri(_account.Endpoint)
-                .AddPath(path)
-                .UseQuery(query)
-                .Build();
-
-            var httpResponse = await SendHttpRequestAsync(httpRequest);
-            httpResponse.EnsureSuccessStatusCode();
-
-            return await new HttpResponseParser()
-                .UseHttpResponse(httpResponse)
-                .ParseJsonContentAsync<TResult>();
-        }
-
-
-        protected async Task<bool> GetAsync(string path, string query)
-        {
-            var httpRequest = new HttpRequestBuilder()
-                .UseGet()
-                .UseRequestUri(_account.Endpoint)
-                .AddPath(path)
-                .UseQuery(query)
-                .Build();
-
-            var httpResponse = await SendHttpRequestAsync(httpRequest);
-            httpResponse.EnsureSuccessStatusCode();
-
-            return new HttpResponseParser()
-                .UseHttpResponse(httpResponse)
-                .ParseSuccessStatus();
-        }
-
-        protected async Task<Stream> GetAsync(string path)
-        {
-            var httpRequest = new HttpRequestBuilder()
-                .UseGet()
-                .UseRequestUri(_account.Endpoint)
-                .AddPath(path)
-                .Build();
-
-            var httpResponse = await SendHttpRequestAsync(httpRequest);
-            httpResponse.EnsureSuccessStatusCode();
-
-            return await new HttpResponseParser()
-                .UseHttpResponse(httpResponse)
-                .ParseStreamContentAsync();
-        }
-
-        protected async Task<bool> PostAsync(string path)
-        {
-            var httpRequest = new HttpRequestBuilder()
-                .UsePost()
-                .UseRequestUri(_account.Endpoint)
-                .AddPath(path)
-                .Build();
-
-            var httpResponse = await SendHttpRequestAsync(httpRequest);
-            httpResponse.EnsureSuccessStatusCode();
-
-            return new HttpResponseParser()
-                .UseHttpResponse(httpResponse)
-                .ParseSuccessStatus();
-        }
-
-        protected async Task<bool> PostAsync(string path, object content)
-        {
-            var httpRequest = new HttpRequestBuilder()
-                .UsePost()
-                .UseRequestUri(_account.Endpoint)
-                .AddPath(path)
-                .UseJsonContent(content)
-                .Build();
-
-            var httpResponse = await SendHttpRequestAsync(httpRequest);
-            httpResponse.EnsureSuccessStatusCode();
-
-            return new HttpResponseParser()
-                .UseHttpResponse(httpResponse)
-                .ParseSuccessStatus();
-        }
-
-        protected async Task<TResult> PostAsync<TResult>(string path, object content)
-        {
-            var httpRequest = new HttpRequestBuilder()
-                .UsePost()
-                .UseRequestUri(_account.Endpoint)
-                .AddPath(path)
-                .UseJsonContent(content)
-                .Build();
-
-            var httpResponse = await SendHttpRequestAsync(httpRequest);
-            httpResponse.EnsureSuccessStatusCode();
-
-            return await new HttpResponseParser()
-                .UseHttpResponse(httpResponse)
-                .ParseJsonContentAsync<TResult>();
-        }
-
-        protected async Task<bool> PutAsync(string path, object content)
-        {
-            var httpRequest = new HttpRequestBuilder()
-                .UsePut()
-                .UseRequestUri(_account.Endpoint)
-                .AddPath(path)
-                .UseJsonContent(content)
-                .Build();
-
-            var httpResponse = await SendHttpRequestAsync(httpRequest);
-            httpResponse.EnsureSuccessStatusCode();
-
-            return new HttpResponseParser()
-                .UseHttpResponse(httpResponse)
-                .ParseSuccessStatus();
-        }
-
-        protected async Task<TResult> PutAsync<TResult>(string path, object content)
-        {
-            var httpRequest = new HttpRequestBuilder()
-                .UsePut()
-                .UseRequestUri(_account.Endpoint)
-                .AddPath(path)
-                .UseJsonContent(content)
-                .Build();
-
-            var httpResponse = await SendHttpRequestAsync(httpRequest);
-            httpResponse.EnsureSuccessStatusCode();
-
-            return await new HttpResponseParser()
-                .UseHttpResponse(httpResponse)
-                .ParseJsonContentAsync<TResult>();
-        }
-
-        protected async Task<bool> DeleteAsync(string path)
-        {
-            var httpRequest = new HttpRequestBuilder()
-                .UseDelete()
-                .UseRequestUri(_account.Endpoint)
-                .AddPath(path)
-                .Build();
-
-            var httpResponse = await SendHttpRequestAsync(httpRequest);
-            httpResponse.EnsureSuccessStatusCode();
-
-            return new HttpResponseParser()
-                .UseHttpResponse(httpResponse)
-                .ParseSuccessStatus();
-        }
-
-        protected async Task<bool> DeleteAsync(string path, object content)
-        {
-            var httpRequest = new HttpRequestBuilder()
-                .UseDelete()
-                .UseRequestUri(_account.Endpoint)
-                .AddPath(path)
-                .UseJsonContent(content)
-                .Build();
-
-            var httpResponse = await SendHttpRequestAsync(httpRequest);
-            httpResponse.EnsureSuccessStatusCode();
-
-            return new HttpResponseParser()
-                .UseHttpResponse(httpResponse)
-                .ParseSuccessStatus();
-        }
-
-        protected async Task<HttpResponseMessage> SendHttpRequestAsync(HttpRequestMessage httpRequest)
+        protected async Task<HttpResponseMessage> SendAsync(HttpRequestMessage httpRequest)
         {
             using (var httpClient = CreateHttpClient())
             {
-                return await httpClient.SendAsync(httpRequest);
+                var httpResponse = await httpClient.SendAsync(httpRequest);
+                if (httpResponse.IsSuccessStatusCode == false)
+                {
+                    throw new ZammadException(httpRequest, httpResponse);
+                }
+                return httpResponse;
             }
         }
 
@@ -209,6 +45,80 @@ namespace Zammad.Client.Core
                 case ZammadAuthentication.Token: return new TokenHttpClientHandler(_account.Token, _account.OnBehalfOf);
                 default: throw new NotImplementedException();
             }
+        }
+
+        protected HttpResponseParser NewParser(HttpResponseMessage httpResponse)
+        {
+            return new HttpResponseParser()
+                .UseHttpResponse(httpResponse);
+        }
+
+        protected async Task<TResult> GetAsync<TResult>(string path, string query = null)
+        {
+            var httpRequest = NewRequest()
+                .UseGet()
+                .UseRequestUri(_account.Endpoint)
+                .AddPath(path)
+                .UseQuery(query)
+                .Build();
+
+            var httpResponse = await SendAsync(httpRequest);
+
+            var result = await NewParser(httpResponse)
+                .ParseAsync<TResult>();
+
+            return result;
+        }
+
+        protected async Task<TResult> PostAsync<TResult>(string path, object content = null)
+        {
+            var httpRequest = new HttpRequestBuilder()
+                .UsePost()
+                .UseRequestUri(_account.Endpoint)
+                .AddPath(path)
+                .UseJsonContent(content)
+                .Build();
+
+            var httpResponse = await SendAsync(httpRequest);
+
+            var result = await NewParser(httpResponse)
+                .ParseAsync<TResult>();
+
+            return result;
+        }
+
+        protected async Task<TResult> PutAsync<TResult>(string path, object content = null)
+        {
+            var httpRequest = new HttpRequestBuilder()
+                .UsePut()
+                .UseRequestUri(_account.Endpoint)
+                .AddPath(path)
+                .UseJsonContent(content)
+                .Build();
+
+            var httpResponse = await SendAsync(httpRequest);
+
+            var result = await NewParser(httpResponse)
+                .ParseAsync<TResult>();
+
+            return result;
+        }
+
+        protected async Task<TResult> DeleteAsync<TResult>(string path, object content = null)
+        {
+            var httpRequest = new HttpRequestBuilder()
+                .UseDelete()
+                .UseRequestUri(_account.Endpoint)
+                .AddPath(path)
+                .UseJsonContent(content)
+                .Build();
+
+            var httpResponse = await SendAsync(httpRequest);
+
+            var result = await NewParser(httpResponse)
+                .ParseAsync<TResult>();
+
+            return result;
         }
     }
 }

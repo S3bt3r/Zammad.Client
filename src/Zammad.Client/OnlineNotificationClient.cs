@@ -43,12 +43,12 @@ namespace Zammad.Client
 
         public Task<bool> DeleteOnlineNotificationAsync(int id)
         {
-            return DeleteAsync($"/api/v1/online_notifications/{id}");
+            return DeleteAsync<bool>($"/api/v1/online_notifications/{id}");
         }
 
         public Task<bool> MarkAllAsReadAsync()
         {
-            return PostAsync("/api/v1/online_notifications/mark_all_as_read");
+            return PostAsync<bool>("/api/v1/online_notifications/mark_all_as_read");
         }
 
         #endregion

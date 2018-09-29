@@ -12,6 +12,7 @@
         public const int OrganizationUpdate = OrganizationSearch + 1;
         public const int OrganizationDelete = OrganizationUpdate + 1;
 
-        public const int TicketSearch = OrganizationDelete + 1;
+        public const int TicketCreate = OrganizationDelete + 1;
+        public const int TicketSearch = TicketCreate + 1;
     }
 }

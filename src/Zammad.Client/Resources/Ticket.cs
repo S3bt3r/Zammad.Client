@@ -14,10 +14,10 @@ namespace Zammad.Client.Resources
         public int GroupId { get; set; }
 
         [JsonProperty("priority_id")]
-        public int PriorityId { get; set; }
+        public int? PriorityId { get; set; }
 
         [JsonProperty("state_id")]
-        public int StateId { get; set; }
+        public int? StateId { get; set; }
 
         [JsonProperty("organization_id")]
         public int? OrganizationId { get; set; }
@@ -83,10 +83,10 @@ namespace Zammad.Client.Resources
         public DateTimeOffset? LastOwnerUpdateAt { get; set; }
 
         [JsonProperty("create_article_type_id")]
-        public int CreateArticleTypeId { get; set; }
+        public int? CreateArticleTypeId { get; set; }
 
         [JsonProperty("create_article_sender_id")]
-        public int CreateArticleSenderId { get; set; }
+        public int? CreateArticleSenderId { get; set; }
 
         [JsonProperty("article_count")]
         public int ArticleCount { get; set; }
@@ -107,10 +107,10 @@ namespace Zammad.Client.Resources
         public IDictionary<string, object> Preferences { get; set; }
 
         [JsonProperty("updated_by_id")]
-        public int UpdatedById { get; set; }
+        public int? UpdatedById { get; set; }
 
         [JsonProperty("created_by_id")]
-        public int CreatedById { get; set; }
+        public int? CreatedById { get; set; }
 
         [JsonProperty("created_at")]
         public DateTimeOffset CreatedAt { get; set; }

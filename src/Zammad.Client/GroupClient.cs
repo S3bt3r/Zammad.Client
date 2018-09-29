@@ -43,7 +43,7 @@ namespace Zammad.Client
 
         public Task<bool> DeleteGroupAsync(int id)
         {
-            return DeleteAsync($"/api/v1/groups/{id}");
+            return DeleteAsync<bool>($"/api/v1/groups/{id}");
         }
 
         #endregion

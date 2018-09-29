@@ -48,7 +48,7 @@ namespace Zammad.Client
 
         public Task<bool> DeleteOrganizationAsync(int id)
         {
-            return DeleteAsync($"/api/v1/organizations/{id}");
+            return DeleteAsync<bool>($"/api/v1/organizations/{id}");
         }
 
         #endregion

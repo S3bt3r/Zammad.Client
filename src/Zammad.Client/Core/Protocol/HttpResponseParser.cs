@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.IO;
 using System.Net;
 using System.Net.Http;
@@ -33,17 +33,12 @@ namespace Zammad.Client.Core.Protocol
             return _httpResponse.StatusCode;
         }
 
-        public int ParseStatusCodeValue()
-        {
-            return (int)_httpResponse.StatusCode;
-        }
-
         public async Task<TContent> ParseJsonContentAsync<TContent>()
         {
             if (_httpResponse.Content.Headers.ContentLength.HasValue &&
                 _httpResponse.Content.Headers.ContentLength == 0)
             {
-                return default(TContent);
+                return default;
             }
 
             if (string.Compare(_httpResponse.Content.Headers.ContentType.MediaType, "application/json", true) != 0)
@@ -76,6 +71,35 @@ namespace Zammad.Client.Core.Protocol
             }
 
             return await _httpResponse.Content.ReadAsStreamAsync();
+        }
+
+        public async Task<TResult> ParseAsync<TResult>()
+        {
+            var result = default(object);
+            switch (typeof(TResult).Name)
+            {
+                case nameof(Boolean):
+                    {
+                        result = ParseSuccessStatus();
+                        break;
+                    }
+                case nameof(HttpStatusCode):
+                    {
+                        result = ParseStatusCode();
+                        break;
+                    }
+                case nameof(Stream):
+                    {
+                        result = await ParseStreamContentAsync();
+                        break;
+                    }
+                default:
+                    {
+                        result = await ParseJsonContentAsync<TResult>();
+                        break;
+                    }
+            }
+            return (TResult)result;
         }
     }
 }

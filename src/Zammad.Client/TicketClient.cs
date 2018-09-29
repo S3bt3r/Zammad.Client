@@ -50,7 +50,7 @@ namespace Zammad.Client
 
         public Task<bool> DeleteTicketAsync(int id)
         {
-            return DeleteAsync($"/api/v1/tickets/{id}");
+            return DeleteAsync<bool>($"/api/v1/tickets/{id}");
         }
 
         #endregion
@@ -84,7 +84,7 @@ namespace Zammad.Client
 
         public Task<Stream> GetTicketArticleAttachmentAsync(int ticketId, int articleId, int id)
         {
-            return GetAsync($"/api/v1/ticket_attachment/{ticketId}/{articleId}/{id}");
+            return GetAsync<Stream>($"/api/v1/ticket_attachment/{ticketId}/{articleId}/{id}");
         }
 
         #endregion
@@ -118,7 +118,7 @@ namespace Zammad.Client
 
         public Task<bool> DeleteTicketPriorityAsync(int id)
         {
-            return DeleteAsync($"/api/v1/ticket_priorities/{id}");
+            return DeleteAsync<bool>($"/api/v1/ticket_priorities/{id}");
         }
 
         #endregion
@@ -152,7 +152,7 @@ namespace Zammad.Client
 
         public Task<bool> DeleteTicketStateAsync(int id)
         {
-            return DeleteAsync($"/api/v1/ticket_states/{id}");
+            return DeleteAsync<bool>($"/api/v1/ticket_states/{id}");
         }
 
         #endregion
