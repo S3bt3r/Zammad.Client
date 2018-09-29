@@ -1,4 +1,6 @@
+﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using Newtonsoft.Json;
 
 namespace Zammad.Client.Resources
@@ -20,5 +22,18 @@ namespace Zammad.Client.Resources
 
         [JsonProperty("preferences")]
         public IDictionary<string, object> Preferences { get; set; }
+
+        public static TicketAttachment CreateFromFile(string fileName, string mimeType)
+        {
+            var buffer = File.ReadAllBytes(fileName);
+            var base64 = Convert.ToBase64String(buffer);
+
+            return new TicketAttachment
+            {
+                Filename = Path.GetFileName(fileName),
+                Data = base64,
+                MimeType = mimeType
+            };
+        }
     }
 }
