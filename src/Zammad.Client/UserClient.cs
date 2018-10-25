@@ -36,6 +36,11 @@ namespace Zammad.Client
             return GetAsync<IList<User>>("/api/v1/users/search", $"query={query}&limit={limit}&expand=true");
         }
 
+        public Task<IList<User>> SearchUserAsync(string query, int limit, string sortBy, string orderBy)
+        {
+            return GetAsync<IList<User>>("/api/v1/users/search", $"query={query}&limit={limit}&expand=true&sort_by={sortBy}&order_by={orderBy}");
+        }
+
         public Task<User> GetUserAsync(int id)
         {
             return GetAsync<User>($"/api/v1/users/{id}");
