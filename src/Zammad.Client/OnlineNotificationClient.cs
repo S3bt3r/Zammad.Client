@@ -23,7 +23,7 @@ namespace Zammad.Client
 
         public Task<IList<OnlineNotification>> GetOnlineNotificationListAsync(int page, int count)
         {
-            return GetAsync<IList<OnlineNotification>>("/api/v1/online_notifications", $"page={page},per_page={count}");
+            return GetAsync<IList<OnlineNotification>>("/api/v1/online_notifications", $"page={page}&per_page={count}");
         }
 
         public Task<OnlineNotification> GetOnlineNotificationAsync(int id)

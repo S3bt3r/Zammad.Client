@@ -147,6 +147,15 @@ namespace Zammad.Client
         }
 
         /// <summary>
+        /// Initializes a new instance of the <see cref="TagClient"/> class.
+        /// </summary>
+        /// <returns>A new instance of the <see cref="TagClient"/> class.</returns>
+        public TagClient CreateTagClient()
+        {
+            return new TagClient(this);
+        }
+
+        /// <summary>
         /// Initializes a new instance of the <see cref="TicketClient"/> class.
         /// </summary>
         /// <returns>A new instance of the <see cref="TicketClient"/> class.</returns>

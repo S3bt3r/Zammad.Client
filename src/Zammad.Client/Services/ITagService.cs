@@ -6,7 +6,7 @@ namespace Zammad.Client.Services
 {
     public interface ITagService
     {
-        Task<IList<Tag>> GetTagListAsync(string objectName, int objectId);
+        Task<IList<string>> GetTagListAsync(string objectName, int objectId);
         Task<IList<Tag>> SearchTagAsync(string term);
         Task<bool> AddTagAsync(string objectName, int objectId, string tagName);
         Task<bool> RemoveTagAsync(string objectName, int objectId, string tagName);

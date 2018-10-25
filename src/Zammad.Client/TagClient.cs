@@ -17,9 +17,9 @@ namespace Zammad.Client
 
         #region ITagService
 
-        public async Task<IList<Tag>> GetTagListAsync(string objectName, int objectId)
+        public async Task<IList<string>> GetTagListAsync(string objectName, int objectId)
         {
-            var tagList = await GetAsync<TagList>("/api/v1/tags", $"object={objectName}&o_id={objectId}");
+            var tagList = await GetAsync<StringTagList>("/api/v1/tags", $"object={objectName}&o_id={objectId}");
             return tagList.Tags;
         }
 
