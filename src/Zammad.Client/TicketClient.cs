@@ -33,6 +33,11 @@ namespace Zammad.Client
             return GetAsync<IList<Ticket>>("/api/v1/tickets/search", $"query={query}&limit={limit}&expand=true");
         }
 
+        public Task<IList<Ticket>> SearchTicketAsync(string query, int limit, string sortBy, string orderBy)
+        {
+            return GetAsync<IList<Ticket>>("/api/v1/tickets/search", $"query={query}&limit={limit}&expand=true&sort_by={sortBy}&order_by={orderBy}");
+        }
+
         public Task<Ticket> GetTicketAsync(int id)
         {
             return GetAsync<Ticket>($"/api/v1/tickets/{id}");
