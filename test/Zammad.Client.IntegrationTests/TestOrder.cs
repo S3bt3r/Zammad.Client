@@ -14,5 +14,7 @@
 
         public const int TicketCreate = OrganizationDelete + 1;
         public const int TicketSearch = TicketCreate + 1;
+
+        public const int TagGetTagList = TicketSearch + 1;
     }
 }
