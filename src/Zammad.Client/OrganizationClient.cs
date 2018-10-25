@@ -23,7 +23,7 @@ namespace Zammad.Client
 
         public Task<IList<Organization>> GetOrganizationListAsync(int page, int count)
         {
-            return GetAsync<IList<Organization>>("/api/v1/organizations", $"page={page},per_page={count}");
+            return GetAsync<IList<Organization>>("/api/v1/organizations", $"page={page}&per_page={count}");
         }
 
         public Task<IList<Organization>> SearchOrganizationAsync(string query, int limit)
