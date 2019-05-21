@@ -32,7 +32,7 @@ namespace Zammad.Connector.Core.IO
                 
                 _logger.LogDebug("Copy to output...");
                 stream.Seek(0, SeekOrigin.Begin);
-                await stream.CopyToAsync(output);
+                await stream.CopyToAsync(output).ConfigureAwait(false);
             }
         }
 
@@ -53,7 +53,7 @@ namespace Zammad.Connector.Core.IO
             using (var reader = XmlReader.Create(stream, GetReaderSettings()))
             {
                 _logger.LogDebug("Copy from input..."); 
-                await input.CopyToAsync(stream);
+                await input.CopyToAsync(stream).ConfigureAwait(false);
 
                 _logger.LogDebug("Deserialize...");
                 var serializer = new System.Xml.Serialization.XmlSerializer(typeof(T));

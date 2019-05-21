@@ -23,7 +23,7 @@ namespace Zammad.Client.Core
         {
             using (var httpClient = CreateHttpClient())
             {
-                var httpResponse = await httpClient.SendAsync(httpRequest);
+                var httpResponse = await httpClient.SendAsync(httpRequest).ConfigureAwait(false);
                 if (httpResponse.IsSuccessStatusCode == false)
                 {
                     throw new ZammadException(httpRequest, httpResponse);
@@ -62,7 +62,7 @@ namespace Zammad.Client.Core
                 .UseQuery(query)
                 .Build();
 
-            var httpResponse = await SendAsync(httpRequest);
+            var httpResponse = await SendAsync(httpRequest).ConfigureAwait(false);
 
             var result = await NewParser(httpResponse)
                 .ParseAsync<TResult>();
@@ -79,7 +79,7 @@ namespace Zammad.Client.Core
                 .UseJsonContent(content)
                 .Build();
 
-            var httpResponse = await SendAsync(httpRequest);
+            var httpResponse = await SendAsync(httpRequest).ConfigureAwait(false);
 
             var result = await NewParser(httpResponse)
                 .ParseAsync<TResult>();
@@ -96,7 +96,7 @@ namespace Zammad.Client.Core
                 .UseJsonContent(content)
                 .Build();
 
-            var httpResponse = await SendAsync(httpRequest);
+            var httpResponse = await SendAsync(httpRequest).ConfigureAwait(false);
 
             var result = await NewParser(httpResponse)
                 .ParseAsync<TResult>();
@@ -113,7 +113,7 @@ namespace Zammad.Client.Core
                 .UseJsonContent(content)
                 .Build();
 
-            var httpResponse = await SendAsync(httpRequest);
+            var httpResponse = await SendAsync(httpRequest).ConfigureAwait(false);
 
             var result = await NewParser(httpResponse)
                 .ParseAsync<TResult>();

@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.Extensions.Logging;
@@ -30,7 +30,7 @@ namespace Zammad.Connector
                 try
                 {
                     var command = _commandResolver.Resolve(name, args);
-                    await command.ExecuteAsync();
+                    await command.ExecuteAsync().ConfigureAwait(false);
 
                     if (_options.AutoClose == false)
                     {

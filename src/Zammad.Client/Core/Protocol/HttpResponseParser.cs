@@ -70,7 +70,7 @@ namespace Zammad.Client.Core.Protocol
                 return Stream.Null;
             }
 
-            return await _httpResponse.Content.ReadAsStreamAsync();
+            return await _httpResponse.Content.ReadAsStreamAsync().ConfigureAwait(false);
         }
 
         public async Task<TResult> ParseAsync<TResult>()
@@ -90,12 +90,12 @@ namespace Zammad.Client.Core.Protocol
                     }
                 case nameof(Stream):
                     {
-                        result = await ParseStreamContentAsync();
+                        result = await ParseStreamContentAsync().ConfigureAwait(false);
                         break;
                     }
                 default:
                     {
-                        result = await ParseJsonContentAsync<TResult>();
+                        result = await ParseJsonContentAsync<TResult>().ConfigureAwait(false);
                         break;
                     }
             }

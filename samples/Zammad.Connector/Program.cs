@@ -21,7 +21,7 @@ namespace Zammad.Connector
             Configuration = CreateConfiguration(Directory.GetCurrentDirectory(), "appsettings.json");
             ServiceProvider = CreateServiceProvider();
 
-            await ServiceProvider.GetRequiredService<App>().RunAsync(args);
+            await ServiceProvider.GetRequiredService<App>().RunAsync(args).ConfigureAwait(false);
         }
 
         private static IConfigurationRoot CreateConfiguration(string basePath, string path)

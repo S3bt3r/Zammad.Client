@@ -34,7 +34,7 @@ namespace Zammad.Connector.Commands
             var ticketClient = _account.CreateTicketClient();
 
             _logger.LogInformation("Retrieve all tickets...");
-            var ticketList = await ticketClient.GetTicketListAsync();
+            var ticketList = await ticketClient.GetTicketListAsync().ConfigureAwait(false);
             _logger.LogInformation("{0} tickets were obtained.", ticketList?.Count);
 
             if (ticketList?.Count > 0)
@@ -51,7 +51,7 @@ namespace Zammad.Connector.Commands
                         export.Tickets.Add(ticketItem);
 
                         _logger.LogInformation("Retrieve all ticket articles for ticket {0}...", ticket.Id);
-                        var articleList = await ticketClient.GetTicketArticleListForTicketAsync(ticket.Id);
+                        var articleList = await ticketClient.GetTicketArticleListForTicketAsync(ticket.Id).ConfigureAwait(false);
                         _logger.LogInformation("{0} ticket articles were obtained.", articleList?.Count);
 
                         if (articleList?.Count > 0)
@@ -70,7 +70,7 @@ namespace Zammad.Connector.Commands
                     }
                 }
 
-                await WriteExportAsync(export);
+                await WriteExportAsync(export).ConfigureAwait(false);
             }
         }
 
@@ -111,7 +111,7 @@ namespace Zammad.Connector.Commands
             using (var fileStream = _fileService.CreateFile(ExportFile))
             {
                 var serializer = _serializerResolver.Resolve(ExportFile);
-                await serializer.SerializeAsync(export, fileStream);
+                await serializer.SerializeAsync(export, fileStream).ConfigureAwait(false);
             }
         }
     }
