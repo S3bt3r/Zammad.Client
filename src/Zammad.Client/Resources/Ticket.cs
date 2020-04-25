@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
 using Newtonsoft.Json;
 
@@ -89,7 +89,7 @@ namespace Zammad.Client.Resources
         public int? CreateArticleSenderId { get; set; }
 
         [JsonProperty("article_count")]
-        public int ArticleCount { get; set; }
+        public int? ArticleCount { get; set; }
 
         [JsonProperty("escalation_at")]
         public DateTimeOffset? EscalationAt { get; set; }
