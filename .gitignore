@@ -262,3 +262,6 @@ __pycache__/
 
 # Custom
 /samples/Zammad.Connector/Export
+/samples/Zammad.Connector/appsettings.json
+TestApp/
+samples/Zammad.Connector/appsettings.json

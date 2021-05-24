@@ -17,6 +17,8 @@
   <PropertyGroup>
     <TargetFramework>netcoreapp2.1</TargetFramework>
     <IsPackable>false</IsPackable>
+    <AssemblyVersion>21.5.23.0</AssemblyVersion>
+    <FileVersion>21.5.23.0</FileVersion>
   </PropertyGroup>
   
   <ItemGroup>

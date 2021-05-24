@@ -117,5 +117,8 @@ namespace Zammad.Client.Resources
 
         [JsonProperty("updated_at")]
         public DateTimeOffset UpdatedAt { get; set; }
+
+        [JsonExtensionData]
+        public Dictionary<string, object> CustomAttributes { get; set; }
     }
 }
