@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
 using Newtonsoft.Json;
 
@@ -12,6 +12,9 @@ namespace Zammad.Client.Resources
 
         [JsonProperty("organization_id")]
         public int? OrganizationId { get; set; }
+
+        [JsonProperty("organization_ids")]
+        public int[] SecondaryOrganizationIds { get; set; }
 
         [JsonProperty("login")]
         public string Login { get; set; }
