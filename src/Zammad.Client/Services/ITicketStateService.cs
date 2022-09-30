@@ -9,8 +9,8 @@ namespace Zammad.Client.Services
         Task<IList<TicketState>> GetTicketStateListAsync();
         Task<IList<TicketState>> GetTicketStateListAsync(int page, int count);
         Task<TicketState> GetTicketStateAsync(int id);
-        Task<TicketState> CreateTicketStateAsync(TicketState priority);
-        Task<TicketState> UpdateTicketStateAsync(int id, TicketState priority);
+        Task<TicketState> CreateTicketStateAsync(TicketState state);
+        Task<TicketState> UpdateTicketStateAsync(int id, TicketState state);
         Task<bool> DeleteTicketStateAsync(int id);
     }
 }
