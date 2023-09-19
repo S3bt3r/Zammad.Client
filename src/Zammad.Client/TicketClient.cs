@@ -27,6 +27,10 @@ namespace Zammad.Client
         {
             return GetAsync<IList<Ticket>>("/api/v1/tickets", $"page={page}&per_page={count}");
         }
+        public Task<Relations> GetTicketRelations(LinkType linktype, LinkObject link_object,int link_object_value)
+        {
+            return GetAsync<Relations>("/api/v1/links", $"link_type={linktype}&link_object={link_object}&link_object_value={link_object_value.ToString()}");
+        }
 
         public Task<IList<Ticket>> SearchTicketAsync(string query, int limit)
         {
