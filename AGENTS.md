@@ -5,7 +5,7 @@
 
 ## Layout
 
-- `src/Zammad.Client.SystemTextJson`: the library (NuGet package). Targets `netstandard2.0;net8.0;net9.0;net10.0`.
+- `src/Zammad.Client.SystemTextJson`: the library (NuGet package). Targets `netstandard2.0;net8.0;net9.0;net10.0;net11.0`.
 - `src/Zammad.Client.SystemTextJson.Extensions`: DI registration (`AddZammadClient`), a separate package.
 - `src/Zammad.Example`: sample app.
 - `test/Zammad.Client.Tests`: unit tests, mostly deserialization of recorded JSON responses.

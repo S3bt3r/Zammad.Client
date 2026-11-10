@@ -28,12 +28,13 @@ jobs:
         with:
           fetch-depth: 0
       - name: Setup .NET
-        uses: actions/setup-dotnet@a98b56852c35b8e3190ac28c8c2271da59106c68 # v6
+        uses: actions/setup-dotnet@0f4a354dd5547a28c70b7853dbd95d5b67886e73 # v6
         with:
           dotnet-version: |
             8.0.x
             9.0.x
             10.0.x
+            11.0.x
       - name: Restore dependencies
         run: dotnet restore
       - name: Build
@@ -59,7 +60,7 @@ jobs:
         with:
           files: ./TestResults/cobertura.xml
       - name: Publish Test Results
-        uses: EnricoMi/publish-unit-test-result-action@7622c5bf3d112a72ab4fa3951c2aa5723d8ab92d # v2
+        uses: EnricoMi/publish-unit-test-result-action@da5b7be67623cd59bbbd1a0ce4f022050a55605f # v2
         if: (!cancelled())
         with:
           files: |
